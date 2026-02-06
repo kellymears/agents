@@ -1,0 +1,50 @@
+# Only format markdown files at root level
+# Ignore everything except .md files
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Site directory (has its own formatting)
+site/
+
+# All non-markdown files
+*.js
+*.mjs
+*.cjs
+*.ts
+*.tsx
+*.jsx
+*.json
+*.jsonc
+*.yml
+*.yaml
+*.css
+*.scss
+*.html
+*.xml
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.woff
+*.woff2
+*.ttf
+*.eot
+
+# Lock files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Generated files
+*.min.js
+*.min.css
