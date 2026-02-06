@@ -1,0 +1,51 @@
+# Documentation
+
+Welcome to the Claude Config documentation. This guide covers setup, configuration, and usage of the custom commands and skills.
+
+## Getting Started
+
+### Prerequisites
+
+- [Claude Code](https://claude.ai/code) installed
+- Git configured with SSH access
+- [GitHub CLI](https://cli.github.com/) for PR creation
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/kellymears/claude.git
+```
+
+Then copy the `.claude` directory to your project or use it as a reference.
+
+## Configuration Files
+
+### settings.local.json
+
+Local permission overrides for Claude Code. This file controls what actions Claude can take without asking for confirmation.
+
+### commands/
+
+Custom slash commands that extend Claude Code's functionality. Each command is defined in a markdown file that describes its behavior.
+
+## Writing Custom Commands
+
+Create a new `.md` file in `.claude/commands/`:
+
+```markdown
+# Command Name
+
+Description of what the command does.
+
+## Usage
+
+How to use the command.
+```
+
+## Best Practices
+
+- **Keep commands focused** - Each command should do one thing well
+- **Document thoroughly** - Clear descriptions help Claude understand intent
+- **Test incrementally** - Build up complex workflows step by step

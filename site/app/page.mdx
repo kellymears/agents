@@ -1,0 +1,93 @@
+# Claude Code Config
+
+<p className="text-xl text-obsidian-300 leading-relaxed max-w-2xl">
+  A personal configuration repository for <a href="https://claude.ai/code" className="text-glass-400 hover:text-glass-300 transition-colors">Claude Code</a> — custom commands, skills, agents, and workflows that extend what's possible.
+</p>
+
+<div className="flex flex-wrap gap-3 mt-8">
+  <a href="/docs" className="glass-button-accent">
+    Get Started
+  </a>
+  <a href="https://github.com/kellymears/agents" className="glass-button" target="_blank" rel="noopener noreferrer">
+    View Source
+  </a>
+</div>
+
+---
+
+## What's Here
+
+<div className="grid sm:grid-cols-2 gap-4 my-8">
+  <div className="glass-card p-5">
+    <div className="w-8 h-8 rounded-lg bg-glass-500/10 border border-glass-500/20 flex items-center justify-center mb-3 text-glass-400">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+      </svg>
+    </div>
+    <h3 className="font-display font-semibold text-obsidian-100 mb-2">Personal Config</h3>
+    <p className="text-obsidian-400 text-sm leading-relaxed">Settings, custom commands, skills, and agents tailored to my workflow.</p>
+  </div>
+  <div className="glass-card p-5">
+    <div className="w-8 h-8 rounded-lg bg-ember-500/10 border border-ember-500/20 flex items-center justify-center mb-3 text-ember-400">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+      </svg>
+    </div>
+    <h3 className="font-display font-semibold text-obsidian-100 mb-2">Experimentation</h3>
+    <p className="text-obsidian-400 text-sm leading-relaxed">A sandbox for exploring agent teams, new features, and pushing boundaries.</p>
+  </div>
+</div>
+
+## Quick Start
+
+Clone the repository to explore the configuration:
+
+```bash
+git clone git@github.com:kellymears/agents.git
+```
+
+## Structure
+
+```
+.claude/commands/   Slash commands - workflows in a keystroke
+skills/             Context that shapes thinking
+  └── blocks/       Small, composable knowledge
+agents/             Specialized agent configurations
+teams/              Multi-agent orchestration
+docs/               Notes and discoveries
+templates/          Starting points for new things
+```
+
+---
+
+## Custom Commands
+
+### /cpr — Commit, Push, Pull Request
+
+A streamlined git workflow command that handles the entire flow from commit to PR creation.
+
+**Features:**
+- Conventional commit format (`type(scope): description`)
+- Automatic push to remote
+- Creates GitHub PR via `gh pr create`
+
+**Commit types:** `feat` | `fix` | `docs` | `style` | `refactor` | `test` | `chore`
+
+---
+
+## Learn More
+
+<div className="grid sm:grid-cols-3 gap-4 mt-6">
+  <a href="/docs" className="glass-card p-4 group hover:shadow-glow-sm transition-all no-underline">
+    <span className="text-glass-400 group-hover:text-glass-300 font-medium">Documentation</span>
+    <p className="text-obsidian-500 text-sm mt-1">Full setup guide</p>
+  </a>
+  <a href="/commands" className="glass-card p-4 group hover:shadow-glow-sm transition-all no-underline">
+    <span className="text-glass-400 group-hover:text-glass-300 font-medium">Commands</span>
+    <p className="text-obsidian-500 text-sm mt-1">All available commands</p>
+  </a>
+  <a href="https://github.com/kellymears/agents" className="glass-card p-4 group hover:shadow-glow-sm transition-all no-underline" target="_blank" rel="noopener noreferrer">
+    <span className="text-glass-400 group-hover:text-glass-300 font-medium">Source Code</span>
+    <p className="text-obsidian-500 text-sm mt-1">Browse on GitHub</p>
+  </a>
+</div>
