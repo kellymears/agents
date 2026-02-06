@@ -3,7 +3,8 @@ import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
-import nextPlugin from "@next/eslint-plugin-next";
+// Note: @next/eslint-plugin-next is not compatible with ESLint 9 yet
+// import nextPlugin from "@next/eslint-plugin-next";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default tseslint.config(
@@ -37,13 +38,12 @@ export default tseslint.config(
     },
   },
 
-  // React and Next.js configuration
+  // React configuration
   {
     files: ["**/*.{ts,tsx,js,jsx}"],
     plugins: {
       react,
       "react-hooks": reactHooks,
-      "@next/next": nextPlugin,
     },
     languageOptions: {
       parserOptions: {
@@ -66,10 +66,6 @@ export default tseslint.config(
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
 
-      // Next.js rules
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs["core-web-vitals"].rules,
-
       // Next.js specific adjustments
       "react/prop-types": "off", // TypeScript handles this
       "react/react-in-jsx-scope": "off", // Not needed in Next.js
@@ -90,6 +86,19 @@ export default tseslint.config(
   {
     files: ["**/*.{js,mjs,cjs}"],
     ...tseslint.configs.disableTypeChecked,
+  },
+
+  // CommonJS files need Node.js globals
+  {
+    files: ["**/*.cjs"],
+    languageOptions: {
+      globals: {
+        module: "readonly",
+        require: "readonly",
+        __dirname: "readonly",
+        __filename: "readonly",
+      },
+    },
   },
 
   // Prettier must be last to override conflicting rules
