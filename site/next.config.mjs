@@ -4,6 +4,8 @@ import createMDX from '@next/mdx'
 const nextConfig = {
   // Support MDX files as pages
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  // Static export for Netlify
+  output: 'export',
 }
 
 const withMDX = createMDX({
