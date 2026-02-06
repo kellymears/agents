@@ -30,6 +30,10 @@ Local permission overrides for Claude Code. This file controls what actions Clau
 
 Custom slash commands that extend Claude Code's functionality. Each command is defined in a markdown file that describes its behavior.
 
+### agents/
+
+Custom agents are specialized personas with their own tools, models, and workflows. Each agent is defined in a markdown file with frontmatter specifying its configuration.
+
 ## Writing Custom Commands
 
 Create a new `.md` file in `.claude/commands/`:
@@ -44,8 +48,33 @@ Description of what the command does.
 How to use the command.
 ```
 
+## Writing Custom Agents
+
+Create a new `.md` file in `.claude/agents/`:
+
+```markdown
+---
+name: my-agent
+description: What the agent specializes in
+tools: Bash, Read, Glob, Grep
+model: sonnet
+---
+
+# My Agent
+
+Instructions for the agent's behavior, philosophy, and workflow.
+```
+
+### Agent Frontmatter
+
+- **name**: The agent identifier
+- **description**: Brief description of the agent's purpose
+- **tools**: Which tools the agent can use (comma-separated)
+- **model**: The Claude model to use (`opus`, `sonnet`, or `haiku`)
+
 ## Best Practices
 
 - **Keep commands focused** - Each command should do one thing well
 - **Document thoroughly** - Clear descriptions help Claude understand intent
 - **Test incrementally** - Build up complex workflows step by step
+- **Give agents clear personas** - A distinct identity helps agents stay on task

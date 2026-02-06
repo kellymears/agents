@@ -1,8 +1,8 @@
 # Claude Code Config
 
-<p className="text-xl text-obsidian-300 leading-relaxed max-w-2xl">
+<div className="text-xl text-obsidian-300 leading-relaxed max-w-2xl">
   A personal configuration repository for <a href="https://claude.ai/code" className="text-glass-400 hover:text-glass-300 transition-colors">Claude Code</a> — custom commands, skills, agents, and workflows that extend what's possible.
-</p>
+</div>
 
 <div className="flex flex-wrap gap-3 mt-8">
   <a href="/docs" className="glass-button-accent">
@@ -75,18 +75,35 @@ A streamlined git workflow command that handles the entire flow from commit to P
 
 ---
 
+## Custom Agents
+
+### The Archivist
+
+A meticulous curator of git history that transforms messy changes into clean, well-scoped commits.
+
+**Capabilities:**
+- Organizes uncommitted changes into logical commits
+- Consolidates and reorders recent commits
+- Uses conventional commit format with meaningful messages
+
+---
+
 ## Learn More
 
-<div className="grid sm:grid-cols-3 gap-4 mt-6">
-  <a href="/docs" className="glass-card p-4 group hover:shadow-glow-sm transition-all no-underline">
+<div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+  <a href="/docs" className="glass-card p-4 group hover:shadow-glow-sm transition-shadow duration-300 no-underline">
     <span className="text-glass-400 group-hover:text-glass-300 font-medium">Documentation</span>
     <p className="text-obsidian-500 text-sm mt-1">Full setup guide</p>
   </a>
-  <a href="/commands" className="glass-card p-4 group hover:shadow-glow-sm transition-all no-underline">
+  <a href="/commands" className="glass-card p-4 group hover:shadow-glow-sm transition-shadow duration-300 no-underline">
     <span className="text-glass-400 group-hover:text-glass-300 font-medium">Commands</span>
     <p className="text-obsidian-500 text-sm mt-1">All available commands</p>
   </a>
-  <a href="https://github.com/kellymears/agents" className="glass-card p-4 group hover:shadow-glow-sm transition-all no-underline" target="_blank" rel="noopener noreferrer">
+  <a href="/agents" className="glass-card p-4 group hover:shadow-glow-sm transition-shadow duration-300 no-underline">
+    <span className="text-ember-400 group-hover:text-ember-300 font-medium">Agents</span>
+    <p className="text-obsidian-500 text-sm mt-1">Specialized personas</p>
+  </a>
+  <a href="https://github.com/kellymears/agents" className="glass-card p-4 group hover:shadow-glow-sm transition-shadow duration-300 no-underline" target="_blank" rel="noopener noreferrer">
     <span className="text-glass-400 group-hover:text-glass-300 font-medium">Source Code</span>
     <p className="text-obsidian-500 text-sm mt-1">Browse on GitHub</p>
   </a>

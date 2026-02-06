@@ -51,7 +51,7 @@ export default function RootLayout({
         </div>
 
         {/* Header */}
-        <header className="fixed top-0 left-0 right-0 z-50">
+        <header className="fixed top-0 left-0 right-0 z-50" style={{ transform: 'translateZ(0)' }}>
           <div className="mx-4 mt-4">
             <nav className="max-w-4xl mx-auto glass-card px-6 py-3 flex items-center justify-between">
               <Link
@@ -72,6 +72,9 @@ export default function RootLayout({
                 </Link>
                 <Link href="/commands" className="nav-link">
                   Commands
+                </Link>
+                <Link href="/agents" className="nav-link">
+                  Agents
                 </Link>
                 <a
                   href="https://github.com/kellymears/agents"
