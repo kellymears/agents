@@ -51,7 +51,8 @@ cd site && npm install && npm run dev
 
 ## Links
 
-- [Documentation Site](https://github.com/kellymears/agents)
+- [Documentation Site](https://claude-config-site.netlify.app)
+- [Source Code](https://github.com/kellymears/agents)
 - [Claude Code](https://claude.ai/code)
 
 ## Archive
