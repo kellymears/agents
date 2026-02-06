@@ -1,0 +1,142 @@
+import { AgentCard } from '@/components/command-card'
+
+# Agents Reference
+
+Custom agents available in this configuration. Agents are specialized personas that handle specific types of tasks with their own tools and workflows.
+
+---
+
+<AgentCard
+  name="archivist"
+  description="Git history curator. Organizes changes into clean, well-scoped commits."
+  model="sonnet"
+/>
+
+## The Archivist
+
+A meticulous curator of git history. The Archivist transforms messy, intermingled changes into a pristine series of commits—each with a clear scope and meaningful message.
+
+### Philosophy
+
+Good commit history tells a story. Each commit should:
+
+- Do one thing well
+- Be independently understandable
+- Build logically on previous commits
+- Use conventional commit format
+
+### Capabilities
+
+The Archivist can handle:
+
+- **Uncommitted changes** — Organize unstaged/staged work into logical commits
+- **Recent commits** — Consolidate or reorder a series of commits
+- **Mixed states** — Both uncommitted changes and commits that need reorganization
+
+### Workflow
+
+1. **Survey** — Analyzes `git status`, `git log`, and `git diff` to understand current state
+2. **Categorize** — Groups changes by logical scope (features, fixes, docs, etc.)
+3. **Plan** — Drafts a commit series and confirms with you before proceeding
+4. **Execute** — Creates clean, atomic commits with meaningful messages
+5. **Finalize** — Optionally invokes `/cpr` to push and create a PR
+
+### Commit Types
+
+<div className="my-6 overflow-x-auto">
+  <table className="w-full text-sm">
+    <thead className="border-b border-white/[0.1]">
+      <tr>
+        <th className="px-4 py-3 text-left font-medium text-obsidian-200 bg-white/[0.02]">Type</th>
+        <th className="px-4 py-3 text-left font-medium text-obsidian-200 bg-white/[0.02]">Description</th>
+      </tr>
+    </thead>
+    <tbody className="divide-y divide-white/[0.05]">
+      <tr className="hover:bg-white/[0.02] transition-colors">
+        <td className="px-4 py-3 text-obsidian-300"><code className="inline-code">feat</code></td>
+        <td className="px-4 py-3 text-obsidian-300">New functionality</td>
+      </tr>
+      <tr className="hover:bg-white/[0.02] transition-colors">
+        <td className="px-4 py-3 text-obsidian-300"><code className="inline-code">fix</code></td>
+        <td className="px-4 py-3 text-obsidian-300">Bug corrections</td>
+      </tr>
+      <tr className="hover:bg-white/[0.02] transition-colors">
+        <td className="px-4 py-3 text-obsidian-300"><code className="inline-code">refactor</code></td>
+        <td className="px-4 py-3 text-obsidian-300">Code improvements without behavior change</td>
+      </tr>
+      <tr className="hover:bg-white/[0.02] transition-colors">
+        <td className="px-4 py-3 text-obsidian-300"><code className="inline-code">docs</code></td>
+        <td className="px-4 py-3 text-obsidian-300">README, comments, documentation</td>
+      </tr>
+      <tr className="hover:bg-white/[0.02] transition-colors">
+        <td className="px-4 py-3 text-obsidian-300"><code className="inline-code">style</code></td>
+        <td className="px-4 py-3 text-obsidian-300">Formatting, whitespace</td>
+      </tr>
+      <tr className="hover:bg-white/[0.02] transition-colors">
+        <td className="px-4 py-3 text-obsidian-300"><code className="inline-code">test</code></td>
+        <td className="px-4 py-3 text-obsidian-300">Adding/updating tests</td>
+      </tr>
+      <tr className="hover:bg-white/[0.02] transition-colors">
+        <td className="px-4 py-3 text-obsidian-300"><code className="inline-code">chore</code></td>
+        <td className="px-4 py-3 text-obsidian-300">Build, config, dependencies</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+### Example
+
+Given mixed changes to auth and UI:
+
+```
+M  src/auth/login.ts      (bug fix)
+M  src/auth/session.ts    (bug fix)
+M  src/ui/button.tsx      (new variant)
+M  src/ui/theme.ts        (new variant support)
+M  README.md              (updated docs)
+```
+
+The Archivist would create:
+
+1. `fix(auth): resolve session expiration race condition`
+2. `feat(ui): add outline button variant`
+3. `docs: update README with button variant examples`
+
+### Safety Guidelines
+
+- **Never force pushes** to main/master
+- **Preserves work** — uses `git stash` if needed, never loses changes
+- **Asks before destructive operations** — confirms with you before any reset/rebase
+- **Keeps commits atomic** — one logical change per commit
+
+---
+
+## Creating Your Own Agents
+
+Agents are defined in `.claude/agents/` as markdown files:
+
+```bash
+.claude/agents/my-agent.md
+```
+
+### Agent File Structure
+
+```markdown
+---
+name: agent-name
+description: Brief description of what the agent does
+tools: Bash, Read, Glob, Grep
+model: sonnet
+---
+
+# Agent Name
+
+Instructions for the agent's behavior and workflow.
+```
+
+The frontmatter defines:
+
+- **name** — The agent identifier
+- **description** — What the agent specializes in
+- **tools** — Which tools the agent can use
+- **model** — The Claude model to use (opus, sonnet, haiku)
