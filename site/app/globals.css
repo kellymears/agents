@@ -61,6 +61,8 @@
     @apply border border-white/[0.08];
     @apply rounded-2xl;
     @apply shadow-glass;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   .glass-card::before {
@@ -76,9 +78,10 @@
     @apply bg-white/[0.05] backdrop-blur-md;
     @apply border border-white/[0.1];
     @apply text-obsidian-200 font-medium text-sm;
-    @apply transition-all duration-300 ease-out;
     @apply hover:bg-white/[0.08] hover:border-white/[0.15];
     @apply hover:shadow-glow-sm;
+    transition: background-color 0.3s ease-out, border-color 0.3s ease-out, box-shadow 0.3s ease-out;
+    transform: translateZ(0);
   }
 
   /* Accent button with glow */
@@ -92,8 +95,9 @@
   /* Navigation link styling */
   .nav-link {
     @apply relative px-3 py-2 text-sm font-medium;
-    @apply text-obsidian-400 transition-all duration-200;
+    @apply text-obsidian-400;
     @apply hover:text-obsidian-100;
+    transition: color 0.2s ease;
   }
 
   .nav-link::after {
@@ -175,6 +179,9 @@
     @apply absolute rounded-full blur-3xl;
     @apply animate-float;
     @apply pointer-events-none;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 }
 
