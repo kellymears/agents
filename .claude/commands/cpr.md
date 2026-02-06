@@ -1,19 +1,21 @@
 ---
-description: Commit, push, and open a pull request with conventional commit formatting
+description:
+  Commit, push, and open a pull request with conventional commit formatting
 allowed-tools: [Bash, Read, Glob, Grep, AskUserQuestion]
 ---
 
 # Commit, Push, and Create Pull Request
 
-Execute a complete git workflow: commit staged/unstaged changes, push to remote, and open a pull request.
+Execute a complete git workflow: commit staged/unstaged changes, push to remote,
+and open a pull request.
 
 ## Workflow
 
 1. Check current branch with `git branch --show-current`
 2. If on `main` or `master`:
-   - Use AskUserQuestion to ask user if they want to:
-     a) Push directly to main/master (requires explicit confirmation)
-     b) Create a new branch (ask for branch name)
+   - Use AskUserQuestion to ask user if they want to: a) Push directly to
+     main/master (requires explicit confirmation) b) Create a new branch (ask
+     for branch name)
    - If creating new branch: `git checkout -b <branch-name>`
 
 3. Run in parallel:
@@ -27,9 +29,11 @@ Execute a complete git workflow: commit staged/unstaged changes, push to remote,
    - Scope (optional): affected area/component
    - Description: concise summary of changes
 
-5. Stage changes: `git add <specific-files>` (prefer specific files over `git add .`)
+5. Stage changes: `git add <specific-files>` (prefer specific files over
+   `git add .`)
 
 6. Commit with conventional format:
+
    ```
    git commit -m "$(cat <<'EOF'
    type(scope): description
@@ -42,6 +46,7 @@ Execute a complete git workflow: commit staged/unstaged changes, push to remote,
 7. Push to remote: `git push -u origin <branch>`
 
 8. Create PR with `gh pr create`:
+
    ```
    gh pr create --title "type(scope): description" --body "$(cat <<'EOF'
    ## Summary

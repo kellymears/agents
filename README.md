@@ -1,6 +1,7 @@
 # Claude Code Configuration
 
-Personal Claude Code configuration with custom commands, agents, and a documentation site.
+Personal Claude Code configuration with custom commands, agents, and a
+documentation site.
 
 ## Structure
 
@@ -25,13 +26,15 @@ Complete git workflow command that:
 - Pushes to remote
 - Creates GitHub PR via `gh pr create`
 
-**Commit types:** `feat` | `fix` | `docs` | `style` | `refactor` | `test` | `chore`
+**Commit types:** `feat` | `fix` | `docs` | `style` | `refactor` | `test` |
+`chore`
 
 ## Custom Agents
 
 ### Archivist
 
-A git history curator that organizes messy changes into clean, well-scoped commits. Use when you need to:
+A git history curator that organizes messy changes into clean, well-scoped
+commits. Use when you need to:
 
 - Organize uncommitted changes into logical commits
 - Consolidate or reorder recent commits
@@ -39,7 +42,8 @@ A git history curator that organizes messy changes into clean, well-scoped commi
 
 ## Documentation Site
 
-The `site/` directory contains a Next.js + MDX documentation site with full details on commands, agents, and configuration.
+The `site/` directory contains a Next.js + MDX documentation site with full
+details on commands, agents, and configuration.
 
 ```bash
 cd site && npm install && npm run dev

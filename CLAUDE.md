@@ -1,10 +1,12 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with
+code in this repository.
 
 ## Repository Purpose
 
-Claude Code configuration repository with custom commands and a documentation site.
+Claude Code configuration repository with custom commands and a documentation
+site.
 
 ## Structure
 
