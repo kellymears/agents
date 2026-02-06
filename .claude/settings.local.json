@@ -5,7 +5,9 @@
       "Bash(git remote add:*)",
       "Bash(git init:*)",
       "Bash(npm run dev:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(git commit:*)",
+      "Bash(git add:*)"
     ]
   }
 }
