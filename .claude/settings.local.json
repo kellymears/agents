@@ -7,7 +7,12 @@
       "Bash(npm run dev:*)",
       "Bash(curl:*)",
       "Bash(git commit:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(git config:*)",
+      "WebSearch",
+      "WebFetch(domain:claudelog.com)",
+      "WebFetch(domain:blog.stackademic.com)"
     ]
   }
 }
