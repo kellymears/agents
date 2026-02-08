@@ -11,6 +11,7 @@ export function CommandCard({ name, description, usage }: CommandCardProps) {
         <code className="text-lg font-mono font-semibold text-glass-400 group-hover:text-glow transition-[text-shadow] duration-300">
           {name}
         </code>
+
         <span className="text-xs text-obsidian-400 bg-obsidian-800/50 px-2.5 py-1 rounded-lg border border-white/[0.05] font-mono">
           {usage}
         </span>
@@ -67,12 +68,14 @@ export function AgentCard({ name, description, model }: AgentCardProps) {
         <code className="text-lg font-mono font-semibold text-ember-400 group-hover:text-glow transition-[text-shadow] duration-300">
           {name}
         </code>
+
         {model && (
           <span className="text-xs text-obsidian-400 bg-obsidian-800/50 px-2.5 py-1 rounded-lg border border-white/[0.05] font-mono">
             {model}
           </span>
         )}
       </div>
+
       <p className="text-obsidian-300 text-sm leading-relaxed">{description}</p>
     </div>
   )

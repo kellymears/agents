@@ -1,1 +1,1 @@
-export { CommandCard, FeatureCard, StatCard, AgentCard } from './command-card'
+export { AgentCard, CommandCard, FeatureCard, StatCard } from './command-card';
