@@ -12,7 +12,11 @@
       "Bash(git config:*)",
       "WebSearch",
       "WebFetch(domain:claudelog.com)",
-      "WebFetch(domain:blog.stackademic.com)"
+      "WebFetch(domain:blog.stackademic.com)",
+      "Bash(npm outdated:*)",
+      "Bash(test:*)",
+      "Bash(npx depcheck:*)",
+      "WebFetch(domain:skills.sh)"
     ]
   }
 }
