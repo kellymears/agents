@@ -1,19 +1,17 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with
-code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Repository Purpose
 
-Claude Code configuration repository with custom commands, agents, and a
-documentation site.
+Claude Code configuration repository with custom commands, agents, and a documentation site.
 
 ## Structure
 
 ```
 .claude/
-├── commands/           # Custom slash commands (e.g., /cpr)
-├── agents/             # Custom agent definitions (11 agents)
+├── commands/           # Custom slash commands (/cpr, /tdd)
+├── agents/             # Custom agent definitions (9 agents)
 └── settings.local.json # Local permission overrides
 
 site/                   # Next.js + MDX documentation site
@@ -31,23 +29,25 @@ A complete git workflow command that:
 
 Commit types: `feat|fix|docs|style|refactor|test|chore`
 
+### /tdd - Test-Driven Development
+
+Enforces the red-green-refactor cycle. Language-agnostic — works with any tester agent. Write a failing test, make it pass, clean up, repeat.
+
 ## Agents
 
-11 custom agents in `.claude/agents/`, symlinked globally to `~/.claude/agents/`.
+9 custom agents in `.claude/agents/`, symlinked globally to `~/.claude/agents/`.
 
 | Agent | Model | Role |
-|-------|-------|------|
+| --- | --- | --- |
 | archivist | sonnet | Git history curator |
-| tester | sonnet | Test generator & runner (vitest, Storybook, PHPUnit) |
+| php-tester | sonnet | PHP test specialist (PHPUnit, WP_Mock, Mockery) — discovery-driven, behavior-focused |
+| ts-tester | sonnet | TypeScript test specialist (Vitest, Storybook, MSW) — discovery-driven, behavior-focused |
+| ruby-tester | sonnet | Ruby/Rails test specialist (RSpec, FactoryBot, VCR) — discovery-driven, behavior-focused |
 | project-manager | sonnet | GitHub issue manager via `gh` CLI |
-| lint-guardian | sonnet | Lint & format enforcer |
 | technical-writer | sonnet | Documentation specialist |
-| improvement-scout | sonnet | Read-only improvement scanner |
-| architect | opus | Software architect (plan mode) |
-| wordpress-specialist | sonnet | WordPress ecosystem expert |
-| dependency-doctor | sonnet | Dependency management |
+| wordpress-specialist | sonnet | WordPress ecosystem expert (Gutenberg, REST APIs, CPTs, theme.json) |
+| roots-specialist | sonnet | Roots ecosystem expert (Bedrock, Sage, Acorn, Bud.js) |
 | reviewer | sonnet | Read-only code reviewer |
-| migrator | sonnet | Migration specialist |
 
 ## Documentation Site
 
