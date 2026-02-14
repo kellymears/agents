@@ -1,0 +1,13 @@
+# Only format markdown files at root level
+# Ignore everything except .md files
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+build/
+.netlify/
+.next/
+out/

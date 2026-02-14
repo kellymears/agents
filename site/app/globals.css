@@ -2,247 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import premium fonts */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap');
 
-/* Base layer for dark mode */
 @layer base {
-  :root {
-    --color-obsidian-950: 13 13 16;
-    --color-obsidian-900: 26 26 31;
-    --color-glass-500: 0 232 218;
-    --color-ember-500: 245 158 11;
-  }
-
   html {
     scroll-behavior: smooth;
     color-scheme: dark;
   }
 
   body {
-    @apply antialiased bg-obsidian-950 text-obsidian-200 font-body;
-    background-image:
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 232, 218, 0.08), transparent),
-      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(251, 191, 36, 0.04), transparent);
+    @apply antialiased bg-background text-foreground font-sans;
   }
 
-  /* Custom selection colors */
   ::selection {
-    @apply bg-glass-500/30 text-white;
+    @apply bg-foreground/20 text-foreground;
   }
 
-  /* Scrollbar styling */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-obsidian-900;
+    @apply bg-background;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-obsidian-700 rounded-full;
+    @apply bg-muted-foreground rounded-full;
     border: 2px solid transparent;
     background-clip: content-box;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-obsidian-600;
+    @apply bg-foreground/50;
   }
 }
 
-/* Component layer for reusable patterns */
 @layer components {
-  /* Glass card effect - Apple-inspired */
-  .glass-card {
-    @apply relative overflow-hidden;
-    @apply bg-white/[0.03] backdrop-blur-xl;
-    @apply border border-white/[0.08];
-    @apply rounded-2xl;
-    @apply shadow-glass;
-    transform: translateZ(0);
-    backface-visibility: hidden;
+  .flat-card {
+    @apply border border-border rounded-lg;
   }
 
-  .glass-card::before {
-    content: '';
-    @apply absolute inset-0 rounded-2xl;
-    @apply bg-gradient-to-br from-white/[0.08] via-transparent to-transparent;
-    @apply pointer-events-none;
-  }
-
-  /* Liquid glass button */
-  .glass-button {
-    @apply relative px-4 py-2 rounded-xl;
-    @apply bg-white/[0.05] backdrop-blur-md;
-    @apply border border-white/[0.1];
-    @apply text-obsidian-200 font-medium text-sm;
-    @apply hover:bg-white/[0.08] hover:border-white/[0.15];
-    @apply hover:shadow-glow-sm;
-    transition: background-color 0.3s ease-out, border-color 0.3s ease-out, box-shadow 0.3s ease-out;
-    transform: translateZ(0);
-  }
-
-  /* Accent button with glow */
-  .glass-button-accent {
-    @apply glass-button;
-    @apply bg-glass-500/10 border-glass-500/20;
-    @apply text-glass-400;
-    @apply hover:bg-glass-500/15 hover:border-glass-500/30;
-  }
-
-  /* Navigation link styling */
   .nav-link {
-    @apply relative px-3 py-2 text-sm font-medium;
-    @apply text-obsidian-400;
-    @apply hover:text-obsidian-100;
-    transition: color 0.2s ease;
+    @apply text-sm text-muted-foreground hover:text-foreground transition-colors px-3 py-2;
   }
 
-  .nav-link::after {
-    content: '';
-    @apply absolute bottom-0 left-3 right-3 h-px;
-    @apply bg-gradient-to-r from-transparent via-glass-500 to-transparent;
-    @apply opacity-0 transition-opacity duration-200;
-  }
-
-  .nav-link:hover::after {
-    @apply opacity-100;
-  }
-
-  /* Code block styling */
   .code-block {
-    @apply relative;
-    @apply bg-obsidian-900/80 backdrop-blur-sm;
-    @apply border border-white/[0.05];
-    @apply rounded-xl overflow-hidden;
+    @apply bg-muted border border-border rounded-lg overflow-hidden;
   }
 
-  .code-block::before {
-    content: '';
-    @apply absolute top-0 left-0 right-0 h-px;
-    @apply bg-gradient-to-r from-transparent via-glass-500/30 to-transparent;
-  }
-
-  /* Reset code inside pre blocks */
   .code-block pre code {
     @apply bg-transparent border-0 p-0 text-inherit;
   }
 
-  /* Inline code */
   .inline-code {
     @apply px-1.5 py-0.5 rounded-md;
-    @apply bg-glass-500/10 text-glass-400;
-    @apply border border-glass-500/20;
+    @apply bg-muted text-foreground border border-border;
     @apply font-mono text-[0.875em];
   }
 
-  /* Shimmer effect */
-  .shimmer {
-    @apply relative overflow-hidden;
-  }
-
-  .shimmer::after {
-    content: '';
-    @apply absolute inset-0;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.05),
-      transparent
-    );
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite;
-  }
-
-  /* Glow text effect */
-  .text-glow {
-    text-shadow: 0 0 20px rgba(0, 232, 218, 0.5), 0 0 40px rgba(0, 232, 218, 0.3);
-  }
-
-  /* Gradient text */
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    @apply bg-gradient-to-r from-glass-400 via-glass-300 to-ember-400;
-    background-size: 200% auto;
-  }
-
-  /* Section divider */
   .section-divider {
-    @apply h-px w-full;
-    @apply bg-gradient-to-r from-transparent via-obsidian-700 to-transparent;
-  }
-
-  /* Floating orb decoration */
-  .orb {
-    @apply absolute rounded-full blur-3xl;
-    @apply animate-float;
-    @apply pointer-events-none;
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
+    @apply h-px w-full bg-border;
   }
 }
 
-/* Utility layer */
 @layer utilities {
-  /* Text balance for headings */
   .text-balance {
     text-wrap: balance;
-  }
-
-  /* Subtle noise texture overlay */
-  .noise {
-    position: relative;
-  }
-
-  .noise::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.02;
-    pointer-events: none;
-    mix-blend-mode: overlay;
-  }
-
-  /* Mask for fade effects */
-  .mask-fade-b {
-    mask-image: linear-gradient(to bottom, black 60%, transparent);
-  }
-
-  .mask-fade-t {
-    mask-image: linear-gradient(to top, black 60%, transparent);
-  }
-}
-
-/* Animations */
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(2deg);
-  }
-}
-
-@keyframes pulse-ring {
-  0% {
-    transform: scale(0.8);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
   }
 }

@@ -3,8 +3,8 @@ import Link from 'next/link'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Claude Config',
-  description: 'Claude Code configuration repository - custom commands, skills, and workflows',
+  title: 'kellymears/agents',
+  description: "Kelly Mears' personal Claude Code configuration — custom commands, agents, and workflows",
 }
 
 function Logo() {
@@ -14,7 +14,7 @@ function Logo() {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      className="text-glass-400"
+      className="text-foreground"
     >
       <path
         d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
@@ -43,70 +43,64 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="min-h-screen relative overflow-x-hidden">
-        {/* Ambient background orbs */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <div className="orb w-[600px] h-[600px] -top-[300px] -left-[200px] bg-glass-500/[0.07]" />
-          <div className="orb w-[500px] h-[500px] top-[40%] -right-[200px] bg-ember-500/[0.05]" style={{ animationDelay: '-3s' }} />
-          <div className="orb w-[400px] h-[400px] bottom-[10%] left-[20%] bg-glass-500/[0.04]" style={{ animationDelay: '-5s' }} />
-        </div>
-
         {/* Header */}
-        <header className="fixed top-0 left-0 right-0 z-50" style={{ transform: 'translateZ(0)' }}>
-          <div className="mx-4 mt-4">
-            <nav className="max-w-4xl mx-auto glass-card px-6 py-3 flex items-center justify-between">
-              <Link
-                href="/"
-                className="flex items-center gap-3 group"
-              >
-                <div className="relative">
-                  <Logo />
-                  <div className="absolute inset-0 bg-glass-400/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-                <span className="font-display font-semibold text-obsidian-100 tracking-tight">
-                  claude<span className="text-glass-400">/</span>config
-                </span>
+        <header className="sticky top-0 z-50 bg-background">
+          <nav className="max-w-4xl mx-auto h-14 px-6 flex items-center justify-between">
+            <Link
+              href="/"
+              className="flex items-center gap-3"
+            >
+              <Logo />
+              <span className="font-sans font-semibold text-foreground tracking-tight">
+                kellymears<span className="text-muted-foreground">/</span>agents
+              </span>
+            </Link>
+            <div className="flex items-center gap-1">
+              <Link href="/commands" className="nav-link">
+                Commands
               </Link>
-              <div className="flex items-center gap-1">
-                <Link href="/docs" className="nav-link">
-                  Docs
-                </Link>
-                <Link href="/commands" className="nav-link">
-                  Commands
-                </Link>
-                <Link href="/agents" className="nav-link">
-                  Agents
-                </Link>
-                <a
-                  href="https://github.com/kellymears/agents"
-                  className="nav-link flex items-center gap-2"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <GithubIcon />
-                  <span className="hidden sm:inline">Source</span>
-                </a>
-              </div>
-            </nav>
-          </div>
+              <Link href="/agents" className="nav-link">
+                Agents
+              </Link>
+              <a
+                href="https://github.com/kellymears/agents"
+                className="nav-link flex items-center gap-2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GithubIcon />
+                <span className="hidden sm:inline">Source</span>
+              </a>
+            </div>
+          </nav>
+          <div className="h-px bg-border" />
         </header>
 
         {/* Main content */}
-        <main className="relative max-w-4xl mx-auto px-6 pt-28 pb-24">
+        <main className="relative max-w-4xl mx-auto px-6 pt-8 pb-24">
           {children}
         </main>
 
         {/* Footer */}
-        <footer className="relative border-t border-white/[0.05]">
+        <footer className="relative border-t border-border">
           <div className="max-w-4xl mx-auto px-6 py-8">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3 text-sm text-obsidian-500">
+              <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Logo />
-                <span className="font-display">claude/config</span>
+                <span className="font-sans">kellymears/agents</span>
               </div>
-              <div className="flex items-center gap-6 text-sm text-obsidian-500">
+              <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                <a
+                  href="https://kellymears.me"
+                  className="hover:text-foreground transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  kellymears.me
+                </a>
                 <a
                   href="https://github.com/kellymears/agents"
-                  className="hover:text-obsidian-300 transition-colors"
+                  className="hover:text-foreground transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -114,7 +108,7 @@ export default function RootLayout({
                 </a>
                 <a
                   href="https://claude.ai/code"
-                  className="hover:text-obsidian-300 transition-colors"
+                  className="hover:text-foreground transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

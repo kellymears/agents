@@ -1,8 +1,8 @@
 // @ts-check
 import eslint from "@eslint/js";
-import tseslint from "typescript-eslint";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
+import tseslint from "typescript-eslint";
 // Note: @next/eslint-plugin-next is not compatible with ESLint 9 yet
 // import nextPlugin from "@next/eslint-plugin-next";
 import eslintConfigPrettier from "eslint-config-prettier";
