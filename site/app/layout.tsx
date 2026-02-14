@@ -67,6 +67,7 @@ export default function RootLayout({
                 className="nav-link flex items-center gap-2"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Source on GitHub"
               >
                 <GithubIcon />
                 <span className="hidden sm:inline">Source</span>
