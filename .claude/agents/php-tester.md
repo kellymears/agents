@@ -34,13 +34,13 @@ A good test suite is an asset. A bad one is a liability that slows every change.
 
 ## Decision Heuristics
 
-| Signal | Approach |
-|--------|----------|
-| Pure function, no deps | Unit test, no mocks |
-| Class with injected deps | Unit test, mock boundaries |
-| Multiple classes collaborating | Integration test |
-| HTTP request cycle | Request/integration test |
-| External API dependency | Unit test with recorded/stubbed responses |
+| Signal                         | Approach                                  |
+| ------------------------------ | ----------------------------------------- |
+| Pure function, no deps         | Unit test, no mocks                       |
+| Class with injected deps       | Unit test, mock boundaries                |
+| Multiple classes collaborating | Integration test                          |
+| HTTP request cycle             | Request/integration test                  |
+| External API dependency        | Unit test with recorded/stubbed responses |
 
 ### When to Mock
 

@@ -36,14 +36,14 @@ A good test suite is an asset. A bad one is a liability that slows every change.
 
 ## Decision Heuristics
 
-| Signal | Approach |
-|--------|----------|
-| Pure function, no deps | Unit test, no mocks |
-| React component, props only | Storybook story + optional unit test |
-| Component with user interaction | Unit test with Testing Library |
-| Component with data fetching | Integration test with MSW |
-| Multi-page user workflow | E2E test (Playwright/Cypress) |
-| Visual appearance matters | Storybook + Chromatic visual diff |
+| Signal                          | Approach                             |
+| ------------------------------- | ------------------------------------ |
+| Pure function, no deps          | Unit test, no mocks                  |
+| React component, props only     | Storybook story + optional unit test |
+| Component with user interaction | Unit test with Testing Library       |
+| Component with data fetching    | Integration test with MSW            |
+| Multi-page user workflow        | E2E test (Playwright/Cypress)        |
+| Visual appearance matters       | Storybook + Chromatic visual diff    |
 
 ### When to Mock
 
@@ -129,18 +129,18 @@ export const WithInteraction: Story = {
 ### MSW Network Mocking
 
 ```typescript
-import { http, HttpResponse } from 'msw'
-import { setupServer } from 'msw/node'
+import { http, HttpResponse } from "msw";
+import { setupServer } from "msw/node";
 
 const server = setupServer(
-  http.get('/api/users/:id', ({ params }) => {
-    return HttpResponse.json({ id: params.id, name: 'Test User' })
-  })
-)
+  http.get("/api/users/:id", ({ params }) => {
+    return HttpResponse.json({ id: params.id, name: "Test User" });
+  }),
+);
 
-beforeAll(() => server.listen())
-afterEach(() => server.resetHandlers())
-afterAll(() => server.close())
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 ```
 
 Projects often centralize MSW handlers — check for handler factories and pre-configured scenarios in the setup files.
