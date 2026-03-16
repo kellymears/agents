@@ -16,30 +16,17 @@ Write a well-formatted markdown note to an Obsidian vault.
 ## Obsidian Vault Root
 
 ```
-~/Library/Mobile Documents/iCloud~md~obsidian/Documents/
+~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Daily/
 ```
-
-## Available Vaults
-
-| Vault       | Purpose                          |
-| ----------- | -------------------------------- |
-| Journal     | Daily notes, guides, logs        |
-| Development | Dev tooling, workflow, reference |
-| oncarrot    | Carrot project notes             |
-| Personal    | Personal notes                   |
-| Inventory   | Asset tracking                   |
-| bud         | bud.js project notes             |
 
 ## Workflow
 
 1. Parse the user's request for:
    - **Topic/title** — what the note is about
-   - **Target vault** — which vault to write to
-   - **Subfolder** — optional path within the vault (e.g., `guides/`, `2026/02/`)
+   - **Subfolder** — optional path within the vault (e.g., `guides/`)
    - **Content direction** — what the note should cover
 
 2. If the vault or topic is ambiguous, use AskUserQuestion to clarify:
-   - Which vault (default: Journal)
    - Any subfolder structure preference
    - Scope of content
 
