@@ -40,3 +40,7 @@ coverage/
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Skill runtime state
+.claude/skills/**/.session.json
+.claude/skills/**/.history.json
