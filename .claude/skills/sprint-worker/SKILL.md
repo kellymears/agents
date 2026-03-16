@@ -82,7 +82,7 @@ If no eligible issues remain after filtering, report that and stop.
 
 ### 2.1 Create Team
 
-```
+```text
 TeamCreate with team_name: "sprint-worker"
 ```
 
@@ -98,7 +98,7 @@ For each confirmed issue, create a task via `TaskCreate` with:
 
 For each issue (up to concurrency limit), spawn a `general-purpose` Task agent:
 
-```
+```text
 Task with:
   subagent_type: "general-purpose"
   team_name: "sprint-worker"
