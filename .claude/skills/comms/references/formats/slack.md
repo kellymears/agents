@@ -5,6 +5,7 @@
 Slack messages exist on a spectrum. Match the register to the situation.
 
 ### Quick/casual
+
 - Lowercase is default. Capitalize when the thought is substantial enough to warrant it.
 - Sentence fragments are fine. One-word reactions are fine.
 - Two-dot ellipses (`..`) for trailing thoughts. Never three dots.
@@ -14,6 +15,7 @@ Slack messages exist on a spectrum. Match the register to the situation.
 - Links dropped inline. No "check out this link:" preamble.
 
 ### Work/technical
+
 - Full sentences, proper capitalization.
 - State what you already understand before asking a question. This shows you've done the work.
 - Reference specific things by name: files, tools, PRs, people (with @mentions).
@@ -21,6 +23,7 @@ Slack messages exist on a spectrum. Match the register to the situation.
 - Keep questions direct and answerable.
 
 ### Long-form/vulnerable
+
 - No headers, no bullets, no formatting scaffolding. Just paragraphs.
 - Narrative arc through paragraph order, not through structural signposts.
 - Vulnerability without performance: state the feeling directly, don't dress it up.

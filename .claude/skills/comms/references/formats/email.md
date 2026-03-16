@@ -11,6 +11,7 @@ Email sits between Slack and blog in formality. It's more structured than a Slac
 **Opening:** Lead with the point or the ask. No "Hope this email finds you well" or "I wanted to reach out regarding..." State what this is about in the first sentence.
 
 **Body:**
+
 - One thought per paragraph.
 - If there are action items or questions, make them visually distinct (numbered list, or their own short paragraph). Don't bury asks in the middle of prose.
 - Reference specific things by name when relevant.

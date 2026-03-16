@@ -25,6 +25,7 @@ Core traits of the user's writing voice, observed across casual Slack messages, 
 The voice modulates across contexts but keeps the same underlying directness.
 
 ### Casual (Slack, quick messages)
+
 - Lowercase `i`, playful misspellings ("guise"), "lol" deployed naturally
 - Two-dot ellipses (`..`) for trailing thoughts — not three dots, not em dashes
 - Sentence fragments that land: "Ravenous. Performative?"
@@ -33,12 +34,14 @@ The voice modulates across contexts but keeps the same underlying directness.
 - Links and @mentions dropped inline without ceremony
 
 ### Professional (work Slack, email)
+
 - Shifts to full sentences and proper capitalization when the content requires it
 - States what's already understood before asking questions
 - References specific things by name (files, tools, PRs, people)
 - Direct questions, not embedded asks
 
 ### Expository (blog, essays)
+
 - Narrative arc without structural scaffolding — paragraphs build, no headers needed for short pieces
 - Humor through escalation of specifics, not through jokes
 - Builds to emotional or intellectual crescendo without announcing it

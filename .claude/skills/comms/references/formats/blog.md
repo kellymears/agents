@@ -11,6 +11,7 @@ Blog posts are where the full expository voice comes out. Opinionated, direct, c
 **Opening:** First sentence states the core claim, sets the scene, or drops the reader into the middle of the action. No throat-clearing. No "In this post, I'll explore..."
 
 **Body:**
+
 - Headers when they serve navigation in longer technical pieces. Omit them for narrative or short pieces — let paragraph order carry the structure.
 - Code examples for technical posts: show don't tell. Side-by-side comparisons (good vs. bad, before vs. after) are a strong pattern.
 - Quotes for sourced material — block quotes with attribution, not inline paraphrase.
@@ -18,6 +19,7 @@ Blog posts are where the full expository voice comes out. Opinionated, direct, c
 - Comfortable with longer paragraphs when the thought needs room to develop.
 
 **Ending:** Land, don't recap. The ending should feel like the natural last thought, not a summary. Can be:
+
 - A callback to the opening ("Anyway, she's meowing again.")
 - A restatement of the core claim in its sharpest form ("We don't need to resolve the hard problem to notice that we're already choosing.")
 - A practical takeaway stated plainly ("When it doesn't, use a loop.")

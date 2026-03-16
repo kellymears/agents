@@ -10,7 +10,7 @@ Draft human-facing writing that sounds like the person wrote it, not like a lang
 
 ## Why This Skill Exists
 
-AI-generated prose has a recognizable texture. Readers can't always name what's off, but they feel it — and then they stop trusting the text. The goal here is to produce writing that reads as authentically human. Specifically, as authentically *this* human.
+AI-generated prose has a recognizable texture. Readers can't always name what's off, but they feel it — and then they stop trusting the text. The goal here is to produce writing that reads as authentically human. Specifically, as authentically _this_ human.
 
 ## Before You Write Anything
 
@@ -21,19 +21,13 @@ AI-generated prose has a recognizable texture. Readers can't always name what's 
    - Email → `references/formats/email.md`
    - Blog post → `references/formats/blog.md`
    - Everything else → `references/formats/markdown.md`
-4. **Read the closest writing sample(s)** from `references/samples/` to calibrate register and tone. Match the sample to the situation:
-   - Quick casual message → `samples/slack-short.md`
-   - Technical/work coordination → `samples/slack-work.md`
-   - Long-form vulnerable or philosophical → `samples/slack-long.md`
-   - Narrative/observational → `samples/blog-narrative.md`
-   - Technical argument → `samples/blog-technical.md`
-   - Essay with philosophical stakes → `samples/blog-essay.md`
 
 ## Workflow
 
 ### 1. Assess the situation
 
 Before drafting, understand:
+
 - Who is the audience? (coworkers, public, specific person)
 - What's the register? (casual Slack, professional email, public blog)
 - What's the emotional temperature? (excited, concerned, neutral, vulnerable)
@@ -44,6 +38,7 @@ Before drafting, understand:
 Write the content in the user's voice. Follow the voice reference closely. Consult the anti-AI playbook as you write — the patterns to avoid should inform word choice and structure at the drafting stage, not as a post-hoc cleanup pass.
 
 Key principles:
+
 - Lead with the point. No warmup, no preamble.
 - Use the simplest word that's accurate. Not the most impressive one.
 - Let specifics carry weight. Don't inflate importance with adjectives.
@@ -53,6 +48,7 @@ Key principles:
 ### 3. Self-check
 
 Before presenting the draft, scan it against `references/anti-ai.md`. If you catch yourself using any flagged pattern, rewrite that section. Pay particular attention to:
+
 - Vocabulary tells — check every word against the cursed list
 - Parenthetical groups — if you wrote "(X, Y, Z)" anywhere, break the symmetry. Two items or four. Never three in a parenthetical aside.
 - Aphoristic closers — if a paragraph ends with a sentence that reframes or metaphorizes the point, cut it or make it plain
