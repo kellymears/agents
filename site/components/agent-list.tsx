@@ -13,16 +13,13 @@ export function AgentListClient({ agents }: { agents: AgentEntry[] }) {
       {agents.map((agent) => (
         <AgentCard
           key={agent.name}
-          name={agent.name}
-          description={agent.description}
-          model={agent.model}
+          entry={agent}
           onClick={() => { setSelected(agent); }}
         />
       ))}
       {selected && (
         <ContentModal
-          title={selected.name}
-          content={selected.raw}
+          entry={{ type: 'agent', data: selected }}
           open={true}
           onClose={() => { setSelected(null); }}
         />

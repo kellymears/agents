@@ -13,16 +13,13 @@ export function CommandListClient({ commands }: { commands: CommandEntry[] }) {
       {commands.map((command) => (
         <CommandCard
           key={command.name}
-          name={command.name}
-          description={command.description}
-          usage={command.name}
+          entry={command}
           onClick={() => { setSelected(command); }}
         />
       ))}
       {selected && (
         <ContentModal
-          title={selected.name}
-          content={selected.raw}
+          entry={{ type: 'command', data: selected }}
           open={true}
           onClose={() => { setSelected(null); }}
         />

@@ -13,16 +13,13 @@ export function SkillListClient({ skills }: { skills: SkillEntry[] }) {
       {skills.map((skill) => (
         <SkillCard
           key={skill.name}
-          name={skill.name}
-          title={skill.title}
-          description={skill.description}
+          entry={skill}
           onClick={() => { setSelected(skill); }}
         />
       ))}
       {selected && (
         <ContentModal
-          title={selected.name}
-          content={selected.raw}
+          entry={{ type: 'skill', data: selected }}
           open={true}
           onClose={() => { setSelected(null); }}
         />
