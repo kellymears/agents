@@ -25,8 +25,16 @@ export interface CommandEntry {
   raw: string
 }
 
+export interface SkillEntry {
+  name: string
+  title: string
+  description: string
+  raw: string
+}
+
 const agentsDir = path.join(process.cwd(), '..', '.claude', 'agents')
 const commandsDir = path.join(process.cwd(), '..', '.claude', 'commands')
+const skillsDir = path.join(process.cwd(), '..', '.claude', 'skills')
 
 export async function getAgents(): Promise<AgentEntry[]> {
   const files = await fs.readdir(agentsDir)
@@ -69,4 +77,28 @@ export async function getCommands(): Promise<CommandEntry[]> {
       }),
   )
   return entries.sort((a, b) => a.name.localeCompare(b.name))
+}
+
+export async function getSkills(): Promise<SkillEntry[]> {
+  const dirs = await fs.readdir(skillsDir, { withFileTypes: true })
+  const entries = await Promise.all(
+    dirs
+      .filter((d) => d.isDirectory())
+      .map(async (dir) => {
+        const skillPath = path.join(skillsDir, dir.name, 'SKILL.md')
+        const raw = await fs.readFile(skillPath, 'utf-8').catch(() => null)
+        if (!raw) return null
+        const { data, content } = matter(fixBlockScalars(raw))
+        const titleMatch = content.match(/^#\s+(.+)$/m)
+        return {
+          name: String(data['name'] ?? dir.name),
+          title: titleMatch?.[1] ?? String(data['name'] ?? dir.name),
+          description: String(data['description'] ?? ''),
+          raw,
+        } satisfies SkillEntry
+      }),
+  )
+  return entries
+    .filter((e): e is SkillEntry => e !== null)
+    .sort((a, b) => a.name.localeCompare(b.name))
 }

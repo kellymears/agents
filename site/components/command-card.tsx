@@ -60,6 +60,32 @@ export function StatCard({ value, label }: StatCardProps) {
   )
 }
 
+interface SkillCardProps {
+  name: string
+  title: string
+  description: string
+  onClick?: () => void
+}
+
+export function SkillCard({ name, title, description, onClick }: SkillCardProps) {
+  const Wrapper = onClick ? 'button' : 'div'
+  return (
+    <Wrapper
+      className={`flat-card p-5 my-6 group hover:bg-muted/50 transition-colors w-full text-left${onClick ? ' cursor-pointer' : ''}`}
+      {...(onClick ? { onClick, type: 'button' as const } : {})}
+    >
+      <div className="flex items-center justify-between mb-3">
+        <code className="text-lg font-mono font-semibold text-foreground">
+          {name}
+        </code>
+      </div>
+
+      <p className="text-sm font-sans font-medium text-foreground/80 mb-1">{title}</p>
+      <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
+    </Wrapper>
+  )
+}
+
 interface AgentCardProps {
   name: string
   description: string

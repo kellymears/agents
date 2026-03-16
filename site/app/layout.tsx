@@ -62,6 +62,9 @@ export default function RootLayout({
               <Link href="/agents" className="nav-link">
                 Agents
               </Link>
+              <Link href="/skills" className="nav-link">
+                Skills
+              </Link>
               <a
                 href="https://github.com/kellymears/agents"
                 className="nav-link flex items-center gap-2"
