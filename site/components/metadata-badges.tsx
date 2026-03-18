@@ -46,11 +46,3 @@ export function ToolsBadge({ count }: { count: number }) {
     </span>
   )
 }
-
-export function ModelBadge({ model }: { model: string }) {
-  return (
-    <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-md border border-border font-mono">
-      {model}
-    </span>
-  )
-}

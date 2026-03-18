@@ -1,12 +1,11 @@
 'use client'
 
-import type { AgentEntry, CommandEntry, SkillEntry } from '@/lib/content'
+import type { CommandEntry, SkillEntry } from '@/lib/content'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { FileTree } from './file-tree'
-import { CategoryBadge, DateBadge, ModelBadge, ToolsBadge } from './metadata-badges'
+import { CategoryBadge, DateBadge, ToolsBadge } from './metadata-badges'
 
 export type ModalEntry =
-  | { type: 'agent'; data: AgentEntry }
   | { type: 'command'; data: CommandEntry }
   | { type: 'skill'; data: SkillEntry }
 
@@ -27,7 +26,6 @@ function getRaw(entry: ModalEntry): string {
 
 function getTools(entry: ModalEntry): string[] {
   switch (entry.type) {
-    case 'agent': return entry.data.tools
     case 'command': return entry.data.allowedTools
     case 'skill': return []
   }
@@ -112,13 +110,7 @@ export function ContentModal({ entry, open, onClose }: ContentModalProps) {
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
               <CategoryBadge category={data.category} />
-              {entry.type === 'agent' && <ModelBadge model={entry.data.model} />}
               {tools.length > 0 && <ToolsBadge count={tools.length} />}
-              {entry.type === 'agent' && entry.data.memory && (
-                <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-md border border-border">
-                  memory
-                </span>
-              )}
             </div>
 
             <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">

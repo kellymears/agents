@@ -59,9 +59,6 @@ export default function RootLayout({
               <Link href="/commands" className="nav-link">
                 Commands
               </Link>
-              <Link href="/agents" className="nav-link">
-                Agents
-              </Link>
               <Link href="/skills" className="nav-link">
                 Skills
               </Link>

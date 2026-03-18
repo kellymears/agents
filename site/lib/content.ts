@@ -25,18 +25,6 @@ export interface FileTreeNode {
   children?: FileTreeNode[]
 }
 
-export interface AgentEntry {
-  name: string
-  description: string
-  shortDescription: string
-  category: string
-  model: string
-  tools: string[]
-  memory: boolean
-  dates: GitDates
-  raw: string
-}
-
 export interface CommandEntry {
   name: string
   description: string
@@ -165,40 +153,10 @@ function deriveCategory(name: string, description: string): string {
 
 // ── Directories ──────────────────────────────────────────────────────
 
-const agentsDir = path.join(process.cwd(), '..', '.claude', 'agents')
 const commandsDir = path.join(process.cwd(), '..', '.claude', 'commands')
 const skillsDir = path.join(process.cwd(), '..', '.claude', 'skills')
 
 // ── Getters ──────────────────────────────────────────────────────────
-
-export async function getAgents(): Promise<AgentEntry[]> {
-  const files = await fs.readdir(agentsDir)
-  const entries = await Promise.all(
-    files
-      .filter((f) => f.endsWith('.md'))
-      .map(async (file) => {
-        const filePath = path.join(agentsDir, file)
-        const raw = await fs.readFile(filePath, 'utf-8')
-        const { data } = matter(fixBlockScalars(raw))
-        const description = String(data['description'] ?? '')
-        const name = String(data['name'] ?? file.replace(/\.md$/, ''))
-        return {
-          name,
-          description,
-          shortDescription: truncate(description),
-          category: deriveCategory(name, description),
-          model: String(data['model'] ?? 'sonnet'),
-          tools: Array.isArray(data['tools'])
-            ? data['tools'].map(String)
-            : [],
-          memory: data['memory'] === 'user',
-          dates: getGitDates(filePath),
-          raw,
-        } satisfies AgentEntry
-      }),
-  )
-  return entries.sort((a, b) => a.name.localeCompare(b.name))
-}
 
 export async function getCommands(): Promise<CommandEntry[]> {
   const files = await fs.readdir(commandsDir)

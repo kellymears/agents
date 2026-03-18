@@ -1,6 +1,5 @@
-export { AgentList } from './agent-list-server'
-export { AgentCard, CommandCard, FeatureCard, SkillCard, StatCard } from './command-card'
+export { CommandCard, FeatureCard, SkillCard, StatCard } from './command-card'
 export { CommandList } from './command-list-server'
 export { FileTree } from './file-tree'
-export { CategoryBadge, DateBadge, ModelBadge, ToolsBadge, getCategoryBorderClass } from './metadata-badges'
+export { CategoryBadge, DateBadge, ToolsBadge, getCategoryBorderClass } from './metadata-badges'
 export { SkillList } from './skill-list-server'

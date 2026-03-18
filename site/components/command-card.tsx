@@ -1,5 +1,5 @@
-import type { AgentEntry, CommandEntry, SkillEntry } from '@/lib/content'
-import { CategoryBadge, DateBadge, ModelBadge, ToolsBadge, getCategoryBorderClass } from './metadata-badges'
+import type { CommandEntry, SkillEntry } from '@/lib/content'
+import { CategoryBadge, DateBadge, ToolsBadge, getCategoryBorderClass } from './metadata-badges'
 
 function countFileTreeNodes(nodes: SkillEntry['fileTree']): number {
   let count = 0
@@ -112,37 +112,7 @@ export function SkillCard({ entry, onClick }: SkillCardProps) {
   )
 }
 
-// ── Agent Card ───────────────────────────────────────────────────────
-
-interface AgentCardProps {
-  entry: AgentEntry
-  onClick?: () => void
-}
-
-export function AgentCard({ entry, onClick }: AgentCardProps) {
-  return (
-    <CardWrapper onClick={onClick}>
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center gap-2">
-          <CategoryBadge category={entry.category} />
-          <DateBadge date={entry.dates.modifiedAt} />
-        </div>
-        <div className="flex items-center gap-1.5">
-          <ToolsBadge count={entry.tools.length} />
-          <ModelBadge model={entry.model} />
-        </div>
-      </div>
-      <code className="text-base font-mono font-semibold text-foreground">
-        {entry.name}
-      </code>
-      <p className="text-muted-foreground text-sm leading-relaxed mt-1.5 line-clamp-2 pr-6">
-        {entry.shortDescription}
-      </p>
-    </CardWrapper>
-  )
-}
-
-// ── Feature Card (unchanged) ─────────────────────────────────────────
+// ── Feature Card ─────────────────────────────────────────────────────
 
 interface FeatureCardProps {
   icon?: React.ReactNode
