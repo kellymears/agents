@@ -9,7 +9,7 @@
     "format:check": "prettier --check \"**/*.md\""
   },
   "devDependencies": {
-    "prettier": "^3.4.2"
+    "prettier": "3.8.1"
   },
   "engines": {
     "node": ">=20.0.0"
