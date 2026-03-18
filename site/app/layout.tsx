@@ -4,7 +4,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'kellymears/agents',
-  description: "Kelly Mears' personal Claude Code configuration — custom commands, agents, and workflows",
+  description: "Claude Code plugin marketplace — git workflows, research, writing, browser automation, and more.",
 }
 
 function Logo() {
@@ -56,11 +56,8 @@ export default function RootLayout({
               </span>
             </Link>
             <div className="flex items-center gap-1">
-              <Link href="/commands" className="nav-link">
-                Commands
-              </Link>
-              <Link href="/skills" className="nav-link">
-                Skills
+              <Link href="/plugins" className="nav-link">
+                Plugins
               </Link>
               <a
                 href="https://github.com/kellymears/agents"
