@@ -1,0 +1,9 @@
+{
+  "name": "git",
+  "description": "Git workflow skills — commit curation, PR creation, issue filing, and context switching.",
+  "version": "1.0.0",
+  "category": "git",
+  "author": {
+    "name": "Kelly Mears"
+  }
+}

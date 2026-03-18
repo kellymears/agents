@@ -1,0 +1,9 @@
+{
+  "name": "research",
+  "description": "Deep-dive research across any domain with multi-source analysis and cited evidence.",
+  "version": "1.0.0",
+  "category": "research",
+  "author": {
+    "name": "Kelly Mears"
+  }
+}

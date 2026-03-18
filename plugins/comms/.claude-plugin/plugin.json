@@ -1,0 +1,9 @@
+{
+  "name": "comms",
+  "description": "Draft human-facing communications in the user's authentic voice.",
+  "version": "1.0.0",
+  "category": "writing",
+  "author": {
+    "name": "Kelly Mears"
+  }
+}

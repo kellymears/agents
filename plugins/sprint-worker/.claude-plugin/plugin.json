@@ -1,0 +1,9 @@
+{
+  "name": "sprint-worker",
+  "description": "Batch-process GitHub issues using parallel agents.",
+  "version": "1.0.0",
+  "category": "automation",
+  "author": {
+    "name": "Kelly Mears"
+  }
+}

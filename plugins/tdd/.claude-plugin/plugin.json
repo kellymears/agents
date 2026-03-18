@@ -1,0 +1,9 @@
+{
+  "name": "tdd",
+  "description": "Red-green-refactor TDD cycle — write a failing test, make it pass, clean up.",
+  "version": "1.0.0",
+  "category": "testing",
+  "author": {
+    "name": "Kelly Mears"
+  }
+}

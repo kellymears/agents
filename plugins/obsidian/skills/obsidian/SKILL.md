@@ -1,6 +1,10 @@
 ---
-description: Create a document in an Obsidian vault. Supports all vaults synced via iCloud.
-tools:
+name: obsidian
+description: >
+  Create a document in an Obsidian vault. Supports all vaults synced via iCloud.
+  Use this skill when the user asks to create a note, write to Obsidian, save to
+  their vault, or any variation of composing a markdown note for Obsidian.
+allowed-tools:
   - Write
   - Read
   - Glob
@@ -13,11 +17,15 @@ tools:
 
 Write a well-formatted markdown note to an Obsidian vault.
 
-## Obsidian Vault Root
+## Vault Path Resolution
 
-```
-~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Daily/
-```
+Resolve the vault path using this priority order:
+
+1. **Environment variable** — check `OBSIDIAN_VAULT_PATH`. If set, use it directly.
+2. **User prompt** — if the env var is not set, use AskUserQuestion to ask:
+   > What is the path to your Obsidian vault? (e.g., ~/Documents/MyVault)
+
+Cache the resolved path for the remainder of the session.
 
 ## Workflow
 
@@ -46,7 +54,7 @@ Write a well-formatted markdown note to an Obsidian vault.
 
 5. Write the note using the Write tool. Path format:
    ```
-   ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<Vault>/<optional-subfolder>/<Title>.md
+   <vault-path>/<optional-subfolder>/<Title>.md
    ```
 
 ## Note Formatting Rules

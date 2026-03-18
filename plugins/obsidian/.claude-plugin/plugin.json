@@ -1,0 +1,9 @@
+{
+  "name": "obsidian",
+  "description": "Create documents in an Obsidian vault with configurable vault path.",
+  "version": "1.0.0",
+  "category": "notes",
+  "author": {
+    "name": "Kelly Mears"
+  }
+}
