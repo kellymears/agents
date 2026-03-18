@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { CommandEntry, SkillEntry } from '@/lib/content'
 import { CategoryBadge, DateBadge, ToolsBadge, getCategoryBorderClass } from './metadata-badges'
 
@@ -66,18 +67,18 @@ export function CommandCard({ entry, onClick }: CommandCardProps) {
 
 interface SkillCardProps {
   entry: SkillEntry
+  href?: string
   onClick?: () => void
 }
 
-export function SkillCard({ entry, onClick }: SkillCardProps) {
+export function SkillCard({ entry, href, onClick }: SkillCardProps) {
   const refCount = countFileTreeNodes(entry.fileTree)
   const borderClass = getCategoryBorderClass(entry.category)
-  const Wrapper = onClick ? 'button' : 'div'
-  return (
-    <Wrapper
-      className={`flat-card border-l-2 ${borderClass} p-5 my-3 group hover:bg-muted/50 transition-colors w-full text-left relative${onClick ? ' cursor-pointer' : ''}`}
-      {...(onClick ? { onClick, type: 'button' as const } : {})}
-    >
+  const interactive = !!(href ?? onClick)
+  const className = `flat-card border-l-2 ${borderClass} p-5 my-3 group hover:bg-muted/50 transition-colors w-full text-left relative${interactive ? ' cursor-pointer' : ''}`
+
+  const content = (
+    <>
       <div className="flex items-center justify-between mb-1.5">
         <div className="flex items-center gap-2">
           <span className="text-base font-sans font-semibold text-foreground">
@@ -103,13 +104,31 @@ export function SkillCard({ entry, onClick }: SkillCardProps) {
       <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 pr-6">
         {entry.shortDescription}
       </p>
-      {onClick && (
+      {interactive && (
         <span className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/0 group-hover:text-muted-foreground/60 transition-colors text-sm">
           &rarr;
         </span>
       )}
-    </Wrapper>
+    </>
   )
+
+  if (href) {
+    return (
+      <Link href={href} className={`${className} block`}>
+        {content}
+      </Link>
+    )
+  }
+
+  if (onClick) {
+    return (
+      <button type="button" onClick={onClick} className={className}>
+        {content}
+      </button>
+    )
+  }
+
+  return <div className={className}>{content}</div>
 }
 
 // ── Feature Card ─────────────────────────────────────────────────────

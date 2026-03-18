@@ -35,15 +35,49 @@ export interface CommandEntry {
   raw: string
 }
 
+export interface ReferenceFile {
+  path: string      // relative to references/, e.g. "formats/email.md"
+  name: string      // display name, e.g. "formats/email"
+  content: string   // raw markdown source
+}
+
 export interface SkillEntry {
   name: string
+  slug: string      // directory name, URL-safe (e.g. "git-pr" not "git:pr")
   title: string
   description: string
   shortDescription: string
   category: string
   dates: GitDates
   fileTree: FileTreeNode[]
+  references: ReferenceFile[]
   raw: string
+}
+
+export interface PluginEntry {
+  name: string
+  description: string
+  version: string
+  category: string
+  owner: { name: string }
+  skills: SkillEntry[]
+  commands: CommandEntry[]
+}
+
+interface MarketplacePlugin {
+  name: string
+  source: string
+  description: string
+  version: string
+  category: string
+}
+
+interface MarketplaceManifest {
+  name: string
+  description: string
+  version: string
+  owner: { name: string }
+  plugins: MarketplacePlugin[]
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────
@@ -65,7 +99,7 @@ function getGitDates(filePath: string): GitDates {
     const opts = { cwd: repoRoot, encoding: 'utf-8' as const }
 
     const createdOutput = execFileSync(
-      'git', ['log', '--diff-filter=A', '--format=%aI', '--', rel], opts,
+      'git', ['log', '--diff-filter=A', '--format=%aI', '--follow', '--', rel], opts,
     ).trim()
     const created = createdOutput.split('\n').pop() ?? null
 
@@ -115,102 +149,152 @@ function truncate(text: string, maxLen = 140): string {
   return `${text.slice(0, maxLen).trimEnd()}…`
 }
 
-const categoryMap: Record<string, string> = {
-  'git-commits': 'git',
-  'git-issue': 'git',
-  'git-pr': 'git',
-  'git-work': 'git',
-  'git:commits': 'git',
-  'git:issue': 'git',
-  'git:pr': 'git',
-  'git:work': 'git',
-  'playwright-cli': 'browser',
-  comms: 'writing',
-  'sprint-worker': 'automation',
-  'progressive-sim': 'practice',
-  obsidian: 'notes',
-  tdd: 'testing',
-}
-
-const keywordCategories: [RegExp, string][] = [
-  [/test/i, 'testing'],
-  [/review/i, 'review'],
-  [/wordpress|wp|gutenberg/i, 'wordpress'],
-  [/docs?|writ/i, 'docs'],
-  [/manage|project/i, 'management'],
-]
-
-function deriveCategory(name: string, description: string): string {
-  const clean = name.replace(/^\//, '')
-  if (categoryMap[clean]) return categoryMap[clean]
-
-  for (const [re, cat] of keywordCategories) {
-    if (re.test(clean) || re.test(description)) return cat
-  }
-
-  return 'general'
-}
-
 // ── Directories ──────────────────────────────────────────────────────
 
-const commandsDir = path.join(process.cwd(), '..', '.claude', 'commands')
-const skillsDir = path.join(process.cwd(), '..', '.claude', 'skills')
+const marketplacePath = path.join(repoRoot, '.claude-plugin', 'marketplace.json')
+
+// ── Reference scanner ────────────────────────────────────────────────
+
+async function scanReferences(refsDir: string, base = ''): Promise<ReferenceFile[]> {
+  try {
+    const entries = await fs.readdir(refsDir, { withFileTypes: true })
+    const results: ReferenceFile[] = []
+
+    for (const entry of entries) {
+      const fullPath = path.join(refsDir, entry.name)
+      const relPath = base ? `${base}/${entry.name}` : entry.name
+
+      if (entry.isDirectory()) {
+        results.push(...await scanReferences(fullPath, relPath))
+      } else if (entry.name.endsWith('.md')) {
+        const content = await fs.readFile(fullPath, 'utf-8')
+        results.push({
+          path: relPath,
+          name: relPath.replace(/\.md$/, ''),
+          content,
+        })
+      }
+    }
+
+    return results.sort((a, b) => a.path.localeCompare(b.path))
+  } catch {
+    return []
+  }
+}
+
+// ── Plugin scanner ───────────────────────────────────────────────────
+
+async function scanSkills(pluginDir: string, category: string): Promise<SkillEntry[]> {
+  const skillsDir = path.join(pluginDir, 'skills')
+  try {
+    const dirs = await fs.readdir(skillsDir, { withFileTypes: true })
+    const entries = await Promise.all(
+      dirs
+        .filter((d) => d.isDirectory())
+        .map(async (dir) => {
+          const skillPath = path.join(skillsDir, dir.name, 'SKILL.md')
+          const raw = await fs.readFile(skillPath, 'utf-8').catch(() => null)
+          if (!raw) return null
+          const { data, content } = matter(fixBlockScalars(raw))
+          const titleMatch = /^#\s+(.+)$/m.exec(content)
+          const description = String(data['description'] ?? '')
+          const name = String(data['name'] ?? dir.name)
+          const references = await scanReferences(
+            path.join(skillsDir, dir.name, 'references'),
+          )
+          return {
+            name,
+            slug: dir.name,
+            title: titleMatch?.[1] ?? name,
+            description,
+            shortDescription: truncate(description),
+            category,
+            dates: getGitDates(skillPath),
+            fileTree: buildFileTree(path.join(skillsDir, dir.name)),
+            references,
+            raw,
+          } satisfies SkillEntry
+        }),
+    )
+    return entries.filter((e): e is SkillEntry => e !== null)
+  } catch {
+    return []
+  }
+}
+
+async function scanCommands(pluginDir: string, category: string): Promise<CommandEntry[]> {
+  const commandsDir = path.join(pluginDir, 'commands')
+  try {
+    const files = await fs.readdir(commandsDir)
+    const entries = await Promise.all(
+      files
+        .filter((f) => f.endsWith('.md'))
+        .map(async (file) => {
+          const filePath = path.join(commandsDir, file)
+          const raw = await fs.readFile(filePath, 'utf-8')
+          const { data } = matter(fixBlockScalars(raw))
+          const description = String(data['description'] ?? '')
+          const cmdName = `/${file.replace(/\.md$/, '')}`
+          return {
+            name: cmdName,
+            description,
+            shortDescription: truncate(description),
+            category,
+            allowedTools: Array.isArray(data['allowed-tools'])
+              ? data['allowed-tools'].map(String)
+              : [],
+            dates: getGitDates(filePath),
+            raw,
+          } satisfies CommandEntry
+        }),
+    )
+    return entries
+  } catch {
+    return []
+  }
+}
 
 // ── Getters ──────────────────────────────────────────────────────────
 
-export async function getCommands(): Promise<CommandEntry[]> {
-  const files = await fs.readdir(commandsDir)
+export async function getPlugins(): Promise<PluginEntry[]> {
+  const raw = await fs.readFile(marketplacePath, 'utf-8')
+  const manifest: MarketplaceManifest = JSON.parse(raw)
+
   const entries = await Promise.all(
-    files
-      .filter((f) => f.endsWith('.md'))
-      .map(async (file) => {
-        const filePath = path.join(commandsDir, file)
-        const raw = await fs.readFile(filePath, 'utf-8')
-        const { data } = matter(fixBlockScalars(raw))
-        const description = String(data['description'] ?? '')
-        const cmdName = `/${file.replace(/\.md$/, '')}`
-        return {
-          name: cmdName,
-          description,
-          shortDescription: truncate(description),
-          category: deriveCategory(cmdName, description),
-          allowedTools: Array.isArray(data['allowed-tools'])
-            ? data['allowed-tools'].map(String)
-            : [],
-          dates: getGitDates(filePath),
-          raw,
-        } satisfies CommandEntry
-      }),
+    manifest.plugins.map(async (plugin) => {
+      const pluginDir = path.join(repoRoot, plugin.source)
+      const [skills, commands] = await Promise.all([
+        scanSkills(pluginDir, plugin.category),
+        scanCommands(pluginDir, plugin.category),
+      ])
+
+      return {
+        name: plugin.name,
+        description: plugin.description,
+        version: plugin.version,
+        category: plugin.category,
+        owner: manifest.owner,
+        skills,
+        commands,
+      } satisfies PluginEntry
+    }),
   )
+
   return entries.sort((a, b) => a.name.localeCompare(b.name))
 }
 
-export async function getSkills(): Promise<SkillEntry[]> {
-  const dirs = await fs.readdir(skillsDir, { withFileTypes: true })
-  const entries = await Promise.all(
-    dirs
-      .filter((d) => d.isDirectory())
-      .map(async (dir) => {
-        const skillPath = path.join(skillsDir, dir.name, 'SKILL.md')
-        const raw = await fs.readFile(skillPath, 'utf-8').catch(() => null)
-        if (!raw) return null
-        const { data, content } = matter(fixBlockScalars(raw))
-        const titleMatch = /^#\s+(.+)$/m.exec(content)
-        const description = String(data['description'] ?? '')
-        const name = String(data['name'] ?? dir.name)
-        return {
-          name,
-          title: titleMatch?.[1] ?? name,
-          description,
-          shortDescription: truncate(description),
-          category: deriveCategory(name, description),
-          dates: getGitDates(skillPath),
-          fileTree: buildFileTree(path.join(skillsDir, dir.name)),
-          raw,
-        } satisfies SkillEntry
-      }),
-  )
-  return entries
-    .filter((e): e is SkillEntry => e !== null)
-    .sort((a, b) => a.name.localeCompare(b.name))
+export async function getPlugin(name: string): Promise<PluginEntry | undefined> {
+  const plugins = await getPlugins()
+  return plugins.find((p) => p.name === name)
+}
+
+export async function getSkill(
+  pluginName: string,
+  skillSlug: string,
+): Promise<{ plugin: PluginEntry; skill: SkillEntry } | undefined> {
+  const plugin = await getPlugin(pluginName)
+  if (!plugin) return undefined
+  const skill = plugin.skills.find((s) => s.slug === skillSlug)
+  if (!skill) return undefined
+  return { plugin, skill }
 }
