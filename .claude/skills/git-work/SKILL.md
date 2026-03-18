@@ -1,12 +1,7 @@
 ---
 name: git:work
 description: >
-  Start working on an issue, PR, or idea — handles branch creation, context switching,
-  and uncommitted changes. Use when the user wants to work on something, pick up an issue,
-  switch to a PR, resume work, start a task, or context switch. Triggers on phrases like
-  "work on", "pick up", "start", "switch to", "resume", "grab that issue", "context switch",
-  "let me work on #N", "check out PR #N", or any request to begin or resume work on a
-  specific item.
+  Start working on an issue, PR, or idea — handles branch creation, context switching, and uncommitted changes. Use when the user wants to work on something, pick up an issue, switch to a PR, resume work, start a task, or context switch. Triggers on phrases like "work on", "pick up", "start", "switch to", "resume", "grab that issue", "context switch", "let me work on #N", "check out PR #N", or any request to begin or resume work on a specific item.
 ---
 
 # Work Starter
@@ -70,12 +65,12 @@ Wait for the user's choice. If they choose the existing branch, handle uncommitt
 
 Derive the branch name from the issue:
 
-| Issue label or type | Branch prefix |
-|---------------------|---------------|
-| `bug`               | `fix/`        |
-| `feature`, `enhancement` | `feat/`  |
-| `documentation`, `docs`  | `docs/`  |
-| default             | `chore/`      |
+| Issue label or type      | Branch prefix |
+| ------------------------ | ------------- |
+| `bug`                    | `fix/`        |
+| `feature`, `enhancement` | `feat/`       |
+| `documentation`, `docs`  | `docs/`       |
+| default                  | `chore/`      |
 
 Branch format: `<prefix><N>-<slug>` where slug is a 3-5 word kebab-case summary of the issue title.
 
@@ -197,25 +192,20 @@ If the user doesn't choose, default to (a) stash.
 
 **Issue path:**
 
-User: "work on #17"
-→ Fetch issue #17, find no existing branch, create `fix/17-session-timeout-bug` from main, summarize the issue.
+User: "work on #17" → Fetch issue #17, find no existing branch, create `fix/17-session-timeout-bug` from main, summarize the issue.
 
 **PR path:**
 
-User: "pick up PR #42"
-→ Fetch PR #42, checkout the branch, pull latest, summarize: "@alice approved, one comment from @bob about test coverage."
+User: "pick up PR #42" → Fetch PR #42, checkout the branch, pull latest, summarize: "@alice approved, one comment from @bob about test coverage."
 
 **Description with match:**
 
-User: "I want to work on the rate limiting feature"
-→ Search finds issue #23 "Add rate limiting to public API". Present it as a strong match with options to work on it, create a new issue, or branch without an issue.
+User: "I want to work on the rate limiting feature" → Search finds issue #23 "Add rate limiting to public API". Present it as a strong match with options to work on it, create a new issue, or branch without an issue.
 
 **Description with no match:**
 
-User: "start on the new onboarding flow"
-→ Search returns nothing. Say so, then offer: (a) create an issue with `git:issue` first, or (b) create a bespoke branch `feat/new-onboarding-flow`.
+User: "start on the new onboarding flow" → Search returns nothing. Say so, then offer: (a) create an issue with `git:issue` first, or (b) create a bespoke branch `feat/new-onboarding-flow`.
 
 **Uncommitted changes:**
 
-User: "switch to #17" (while on `feat/12-dashboard` with uncommitted changes)
-→ Show `git diff --stat`, offer stash/commit/discard. User picks stash → `git stash push -m "git:work auto-stash from feat/12-dashboard — 2026-03-10"`, then proceed with checkout.
+User: "switch to #17" (while on `feat/12-dashboard` with uncommitted changes) → Show `git diff --stat`, offer stash/commit/discard. User picks stash → `git stash push -m "git:work auto-stash from feat/12-dashboard — 2026-03-10"`, then proceed with checkout.

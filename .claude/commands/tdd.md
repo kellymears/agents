@@ -66,6 +66,7 @@ Before starting, ask the user:
 Then begin the first RED phase.
 
 At the end of each complete cycle (after REFACTOR), report:
+
 - What behavior was added
 - How many tests pass
 - What the next RED cycle should target

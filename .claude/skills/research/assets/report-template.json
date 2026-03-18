@@ -1,0 +1,54 @@
+{
+  "name": "research-report",
+  "description": "Canonical section ordering for research reports. Used by SKILL.md and report-pdf.py.",
+  "sections": [
+    {
+      "id": "frontmatter",
+      "label": "Frontmatter",
+      "required": true,
+      "description": "YAML metadata: title, date, source count, domain"
+    },
+    {
+      "id": "executive-summary",
+      "label": "Executive Summary",
+      "required": true,
+      "description": "2-4 paragraphs of key findings, tensions, and confidence level. Written in the user's voice."
+    },
+    {
+      "id": "findings",
+      "label": "Findings",
+      "required": true,
+      "description": "Detailed findings organized by sub-question or theme. Each includes claim, evidence, confidence tag, and citations."
+    },
+    {
+      "id": "perspectives",
+      "label": "Perspectives",
+      "required": true,
+      "description": "Multiple viewpoints with plausibility tier assignments (Strong/Moderate/Weak/Speculative) and supporting evidence."
+    },
+    {
+      "id": "confidence-assessment",
+      "label": "Confidence Assessment",
+      "required": true,
+      "description": "5-dimension qualitative self-assessment: Source Quality, Consensus, Recency, Domain Familiarity, Evidence Strength."
+    },
+    {
+      "id": "quantitative-analysis",
+      "label": "Quantitative Analysis",
+      "required": false,
+      "description": "Conditional. Computational exploration of numerical claims. Includes scripts used and their output."
+    },
+    {
+      "id": "methodology",
+      "label": "Methodology",
+      "required": true,
+      "description": "Search strategy: queries used, sources consulted, access limitations, verification approach."
+    },
+    {
+      "id": "sources-citations",
+      "label": "Sources & Citations",
+      "required": true,
+      "description": "Full citation list with verification statuses (Verified/Retrieved/Training Data/Unverifiable)."
+    }
+  ]
+}

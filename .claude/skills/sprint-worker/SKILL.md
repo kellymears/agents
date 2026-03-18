@@ -66,7 +66,7 @@ Report any excluded issues and the reason to the user.
 
 Display a table of eligible issues to the user:
 
-| #    | Type  | Title              | Points |
+| ID   | Type  | Title              | Points |
 | ---- | ----- | ------------------ | ------ |
 | 8601 | Bug   | fix(editor): ...   | 2      |
 | 8590 | Story | feat(preview): ... | 3      |
@@ -82,7 +82,7 @@ If no eligible issues remain after filtering, report that and stop.
 
 ### 2.1 Create Team
 
-```text
+```
 TeamCreate with team_name: "sprint-worker"
 ```
 
@@ -98,7 +98,7 @@ For each confirmed issue, create a task via `TaskCreate` with:
 
 For each issue (up to concurrency limit), spawn a `general-purpose` Task agent:
 
-```text
+```
 Task with:
   subagent_type: "general-purpose"
   team_name: "sprint-worker"
@@ -305,8 +305,8 @@ Display a results table:
 | # | Type | Title | Result | PR | Notes |
 | --- | --- | --- | --- | --- | --- |
 | 8601 | Bug | fix(editor): ... | ✅ Done | #8650 | Self-review caught XSS |
-| 8590 | Story | feat(preview): ... | ⏭️ Skipped | — | Missing acceptance criteria |
-| 8575 | Task | chore(cleanup): ... | ❌ Failed | — | Lint errors unfixable |
+| 8590 | Story | feat(preview): ... | ⏭️ Skipped |  | Missing acceptance criteria |
+| 8575 | Task | chore(cleanup): ... | ❌ Failed |  | Lint errors unfixable |
 
 ### 4.2 Follow-Ups
 
