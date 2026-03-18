@@ -66,6 +66,91 @@
   }
 }
 
+@layer components {
+  .prose-markdown {
+    @apply text-foreground/90;
+  }
+
+  .prose-markdown h1 {
+    @apply text-xl font-sans font-bold text-foreground mt-6 mb-3;
+  }
+
+  .prose-markdown h2 {
+    @apply text-lg font-sans font-semibold text-foreground mt-5 mb-2;
+  }
+
+  .prose-markdown h3 {
+    @apply text-base font-sans font-semibold text-foreground mt-4 mb-2;
+  }
+
+  .prose-markdown h4,
+  .prose-markdown h5,
+  .prose-markdown h6 {
+    @apply text-sm font-sans font-semibold text-foreground mt-3 mb-1;
+  }
+
+  .prose-markdown p {
+    @apply mb-3 leading-relaxed;
+  }
+
+  .prose-markdown ul {
+    @apply list-disc list-inside mb-3 space-y-1;
+  }
+
+  .prose-markdown ol {
+    @apply list-decimal list-inside mb-3 space-y-1;
+  }
+
+  .prose-markdown li > ul,
+  .prose-markdown li > ol {
+    @apply ml-4 mt-1 mb-0;
+  }
+
+  .prose-markdown code {
+    @apply px-1.5 py-0.5 rounded-md bg-muted text-foreground border border-border font-mono text-[0.875em];
+  }
+
+  .prose-markdown pre {
+    @apply bg-muted border border-border rounded-lg p-4 mb-3 overflow-x-auto;
+  }
+
+  .prose-markdown pre code {
+    @apply bg-transparent border-0 p-0 text-inherit text-sm;
+  }
+
+  .prose-markdown blockquote {
+    @apply border-l-2 border-border pl-4 text-muted-foreground italic mb-3;
+  }
+
+  .prose-markdown a {
+    @apply text-foreground underline underline-offset-2 hover:text-foreground/80 transition-colors;
+  }
+
+  .prose-markdown hr {
+    @apply border-border my-4;
+  }
+
+  .prose-markdown table {
+    @apply w-full border-collapse mb-3;
+  }
+
+  .prose-markdown th {
+    @apply border border-border px-3 py-1.5 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground/60 bg-muted/30;
+  }
+
+  .prose-markdown td {
+    @apply border border-border px-3 py-1.5;
+  }
+
+  .prose-markdown strong {
+    @apply font-semibold text-foreground;
+  }
+
+  .prose-markdown em {
+    @apply italic;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

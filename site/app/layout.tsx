@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { ViewModeProvider } from '@/components/view-mode-provider'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -43,6 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="min-h-screen relative overflow-x-hidden">
+        <ViewModeProvider>
         {/* Header */}
         <header className="sticky top-0 z-50 bg-background">
           <nav className="max-w-4xl mx-auto h-14 px-6 flex items-center justify-between">
@@ -116,6 +118,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        </ViewModeProvider>
       </body>
     </html>
   )

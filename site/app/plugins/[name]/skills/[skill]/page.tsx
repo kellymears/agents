@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { getPlugins, getSkill } from '@/lib/content'
 import { Breadcrumb } from '@/components/breadcrumb'
 import { CategoryBadge, DateBadge } from '@/components/metadata-badges'
-import { FileTree } from '@/components/file-tree'
+import { SkillFileViewer } from '@/components/skill-file-viewer'
 
 export async function generateStaticParams() {
   const plugins = await getPlugins()
@@ -63,64 +63,18 @@ export default async function SkillPage({ params }: SkillPageProps) {
 
       <hr className="border-border mb-8" />
 
-      {/* SKILL.md source */}
-      <div className="mb-8">
-        <h2 className="text-xs font-medium uppercase tracking-wider text-muted-foreground/60 mb-2">
-          SKILL.md
-        </h2>
-        <div className="code-block p-4">
-          <pre className="overflow-x-auto text-sm leading-relaxed text-muted-foreground">
-            <code>{skill.raw}</code>
-          </pre>
-        </div>
-      </div>
-
-      {/* Reference files */}
-      {skill.references.length > 0 && (
-        <div className="mb-8">
-          <h2 className="text-xs font-medium uppercase tracking-wider text-muted-foreground/60 mb-3">
-            Reference Files ({skill.references.length})
-          </h2>
-          <div className="space-y-2">
-            {skill.references.map((ref, i) => (
-              <details
-                key={ref.path}
-                className="flat-card"
-                open={i === 0}
-              >
-                <summary className="px-4 py-3 cursor-pointer text-sm font-mono text-foreground/80 hover:bg-muted/50 transition-colors select-none">
-                  {ref.path}
-                </summary>
-                <div className="border-t border-border">
-                  <div className="code-block rounded-none border-0 p-4">
-                    <pre className="overflow-x-auto text-sm leading-relaxed text-muted-foreground">
-                      <code>{ref.content}</code>
-                    </pre>
-                  </div>
-                </div>
-              </details>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* File tree */}
-      {skill.fileTree.length > 0 && (
-        <div className="mb-8">
-          <h2 className="text-xs font-medium uppercase tracking-wider text-muted-foreground/60 mb-2">
-            File Tree
-          </h2>
-          <FileTree nodes={skill.fileTree} />
-        </div>
-      )}
+      {/* File viewer */}
+      <SkillFileViewer skillRaw={skill.raw} references={skill.references} />
 
       {/* Back link */}
-      <Link
-        href={`/plugins/${plugin.name}`}
-        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-      >
-        &larr; Back to {plugin.name}
-      </Link>
+      <div className="mt-8">
+        <Link
+          href={`/plugins/${plugin.name}`}
+          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          &larr; Back to {plugin.name}
+        </Link>
+      </div>
     </div>
   )
 }
