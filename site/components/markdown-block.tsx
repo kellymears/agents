@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { useViewMode } from './view-mode-provider'
@@ -8,6 +8,12 @@ import { useViewMode } from './view-mode-provider'
 interface MarkdownBlockProps {
   content: string
   filename?: string
+}
+
+const FRONTMATTER_RE = /^---\r?\n[\s\S]*?\r?\n---\r?\n*/
+
+function stripFrontmatter(text: string): string {
+  return text.replace(FRONTMATTER_RE, '')
 }
 
 function CopyIcon() {
@@ -29,6 +35,9 @@ function CheckIcon() {
 export function MarkdownBlock({ content, filename }: MarkdownBlockProps) {
   const { mode, toggle } = useViewMode()
   const [copied, setCopied] = useState(false)
+  const isRendered = mode === 'rendered'
+
+  const renderedContent = useMemo(() => stripFrontmatter(content), [content])
 
   const handleCopy = () => {
     void navigator.clipboard.writeText(content).then(() => {
@@ -47,14 +56,29 @@ export function MarkdownBlock({ content, filename }: MarkdownBlockProps) {
           </span>
         )}
         {!filename && <span />}
-        <div className="flex items-center gap-1 shrink-0">
-          <button
-            type="button"
-            onClick={toggle}
-            className="text-[11px] px-2 py-1 rounded border border-border text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-          >
-            {mode === 'source' ? 'Rendered' : 'Source'}
-          </button>
+        <div className="flex items-center gap-2 shrink-0">
+          <label className="flex items-center gap-1.5 cursor-pointer select-none">
+            <span className="text-[11px] text-muted-foreground">Show Rendered</span>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={isRendered}
+              onClick={toggle}
+              className={`
+                relative inline-flex h-4 w-7 shrink-0 items-center rounded-full border transition-colors
+                ${isRendered
+                  ? 'bg-foreground border-foreground'
+                  : 'bg-muted border-border'}
+              `}
+            >
+              <span
+                className={`
+                  inline-block h-2.5 w-2.5 rounded-full bg-background transition-transform
+                  ${isRendered ? 'translate-x-3.5' : 'translate-x-0.5'}
+                `}
+              />
+            </button>
+          </label>
           <button
             type="button"
             onClick={handleCopy}
@@ -74,7 +98,7 @@ export function MarkdownBlock({ content, filename }: MarkdownBlockProps) {
           </pre>
         ) : (
           <div className="prose-markdown text-sm leading-relaxed">
-            <Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown>
+            <Markdown remarkPlugins={[remarkGfm]}>{renderedContent}</Markdown>
           </div>
         )}
       </div>
