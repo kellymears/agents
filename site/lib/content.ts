@@ -14,6 +14,8 @@ function fixBlockScalars(raw: string): string {
 
 // ── Types ────────────────────────────────────────────────────────────
 
+export type PluginType = 'skill' | 'statusline'
+
 export interface GitDates {
   createdAt: string | null
   modifiedAt: string | null
@@ -54,14 +56,29 @@ export interface SkillEntry {
   raw: string
 }
 
+export interface DocSection {
+  slug: string
+  title: string
+  content: string
+}
+
+export interface StatuslineData {
+  docs: DocSection[]
+  changelog: string | null
+  upstream: { name: string; url: string; license: string } | null
+  keywords: string[]
+}
+
 export interface PluginEntry {
   name: string
+  type: PluginType
   description: string
   version: string
   category: string
   owner: { name: string }
   skills: SkillEntry[]
   commands: CommandEntry[]
+  statusline?: StatuslineData
 }
 
 interface MarketplacePlugin {
@@ -70,6 +87,7 @@ interface MarketplacePlugin {
   description: string
   version: string
   category: string
+  type?: string
 }
 
 interface MarketplaceManifest {
@@ -222,7 +240,7 @@ async function scanSkills(pluginDir: string, category: string): Promise<SkillEnt
   }
 }
 
-async function scanCommands(pluginDir: string, category: string): Promise<CommandEntry[]> {
+async function scanCommands(pluginDir: string, pluginName: string, category: string): Promise<CommandEntry[]> {
   const commandsDir = path.join(pluginDir, 'commands')
   try {
     const files = await fs.readdir(commandsDir)
@@ -234,7 +252,7 @@ async function scanCommands(pluginDir: string, category: string): Promise<Comman
           const raw = await fs.readFile(filePath, 'utf-8')
           const { data } = matter(fixBlockScalars(raw))
           const description = String(data['description'] ?? '')
-          const cmdName = `/${file.replace(/\.md$/, '')}`
+          const cmdName = `/${pluginName}:${file.replace(/\.md$/, '')}`
           return {
             name: cmdName,
             description,
@@ -254,6 +272,56 @@ async function scanCommands(pluginDir: string, category: string): Promise<Comman
   }
 }
 
+// ── Statusline scanner ──────────────────────────────────────────────
+
+async function scanStatuslineData(pluginDir: string): Promise<StatuslineData> {
+  const docsDir = path.join(pluginDir, 'docs')
+  const docs: DocSection[] = []
+
+  try {
+    const files = await fs.readdir(docsDir)
+    const mdFiles = files.filter((f) => f.endsWith('.md')).sort()
+    for (const file of mdFiles) {
+      const raw = await fs.readFile(path.join(docsDir, file), 'utf-8')
+      const { data, content } = matter(raw)
+      docs.push({
+        slug: file.replace(/\.md$/, ''),
+        title: String(data['title'] ?? file.replace(/\.md$/, '')),
+        content,
+      })
+    }
+  } catch { /* no docs directory */ }
+
+  let changelog: string | null = null
+  try {
+    changelog = await fs.readFile(path.join(pluginDir, 'CHANGELOG.md'), 'utf-8')
+  } catch { /* no changelog */ }
+
+  let upstream: StatuslineData['upstream'] = null
+  try {
+    const pluginJson = JSON.parse(await fs.readFile(
+      path.join(pluginDir, '.claude-plugin', 'plugin.json'), 'utf-8',
+    ))
+    if (pluginJson.upstream) {
+      upstream = {
+        name: String(pluginJson.upstream.name),
+        url: String(pluginJson.upstream.url),
+        license: String(pluginJson.upstream.license),
+      }
+    }
+  } catch { /* no plugin.json or no upstream */ }
+
+  let keywords: string[] = []
+  try {
+    const pkg = JSON.parse(await fs.readFile(path.join(pluginDir, 'package.json'), 'utf-8'))
+    if (Array.isArray(pkg.keywords)) {
+      keywords = pkg.keywords.map(String)
+    }
+  } catch { /* no package.json */ }
+
+  return { docs, changelog, upstream, keywords }
+}
+
 // ── Getters ──────────────────────────────────────────────────────────
 
 export async function getPlugins(): Promise<PluginEntry[]> {
@@ -263,13 +331,33 @@ export async function getPlugins(): Promise<PluginEntry[]> {
   const entries = await Promise.all(
     manifest.plugins.map(async (plugin) => {
       const pluginDir = path.join(repoRoot, plugin.source)
+      const type: PluginType = plugin.type === 'statusline' ? 'statusline' : 'skill'
+
+      if (type === 'statusline') {
+        const [statusline, commands] = await Promise.all([
+          scanStatuslineData(pluginDir),
+          scanCommands(pluginDir, plugin.name, plugin.category),
+        ])
+        return {
+          name: plugin.name,
+          type,
+          description: plugin.description,
+          version: plugin.version,
+          category: plugin.category,
+          owner: manifest.owner,
+          skills: [],
+          commands,
+          statusline,
+        } satisfies PluginEntry
+      }
+
       const [skills, commands] = await Promise.all([
         scanSkills(pluginDir, plugin.category),
-        scanCommands(pluginDir, plugin.category),
+        scanCommands(pluginDir, plugin.name, plugin.category),
       ])
-
       return {
         name: plugin.name,
+        type,
         description: plugin.description,
         version: plugin.version,
         category: plugin.category,

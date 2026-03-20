@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type { PluginEntry } from '@/lib/content'
-import { CategoryBadge, getCategoryBorderClass } from './metadata-badges'
+import { CategoryBadge, TypeBadge, getCategoryBorderClass } from './metadata-badges'
 
 interface PluginCardProps {
   entry: PluginEntry
@@ -23,6 +23,7 @@ export function PluginCard({ entry, href }: PluginCardProps) {
             {entry.name}
           </span>
           <CategoryBadge category={entry.category} />
+          <TypeBadge type={entry.type} />
         </div>
         <div className="flex items-center gap-2">
           {skillCount > 0 && (

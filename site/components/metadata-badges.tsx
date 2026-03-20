@@ -10,6 +10,7 @@ const categoryColors: Record<string, { bg: string; text: string; border: string 
   wordpress: { bg: 'bg-sky-500/10', text: 'text-sky-400/80', border: 'border-l-sky-500/40' },
   management: { bg: 'bg-indigo-500/10', text: 'text-indigo-400/80', border: 'border-l-indigo-500/40' },
   notes: { bg: 'bg-violet-500/10', text: 'text-violet-400/80', border: 'border-l-violet-500/40' },
+  monitoring: { bg: 'bg-lime-500/10', text: 'text-lime-400/80', border: 'border-l-lime-500/40' },
   general: { bg: 'bg-zinc-500/10', text: 'text-zinc-400/80', border: 'border-l-zinc-500/40' },
 }
 
@@ -43,6 +44,15 @@ export function ToolsBadge({ count }: { count: number }) {
   return (
     <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-md border border-border font-mono">
       {count} {count === 1 ? 'tool' : 'tools'}
+    </span>
+  )
+}
+
+export function TypeBadge({ type }: { type: string }) {
+  if (type === 'skill') return null
+  return (
+    <span className="text-[11px] font-mono text-muted-foreground/50 px-1.5 py-0.5 rounded border border-border/50">
+      {type}
     </span>
   )
 }
