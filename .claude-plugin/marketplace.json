@@ -67,7 +67,8 @@
       "source": "./plugins/hud",
       "description": "Real-time statusline — context health, tool activity, agent tracking, and todo progress.",
       "version": "0.0.8",
-      "category": "monitoring"
+      "category": "monitoring",
+      "type": "statusline"
     }
   ]
 }
