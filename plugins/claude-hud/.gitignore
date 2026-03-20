@@ -1,0 +1,5 @@
+node_modules/
+*.tsbuildinfo
+
+# Override root dist/ ignore — dist must be committed for install-time use
+!dist/
