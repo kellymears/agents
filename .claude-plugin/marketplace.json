@@ -63,9 +63,9 @@
       "category": "notes"
     },
     {
-      "name": "claude-hud",
-      "source": "./plugins/claude-hud",
-      "description": "Real-time statusline HUD — context health, tool activity, agent tracking, and todo progress.",
+      "name": "statusline",
+      "source": "./plugins/statusline",
+      "description": "Real-time statusline — context health, tool activity, agent tracking, and todo progress.",
       "version": "0.0.8",
       "category": "monitoring"
     }
