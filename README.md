@@ -14,12 +14,12 @@ Add the marketplace, then install plugins by name:
 ## Plugins
 
 | Plugin | Description |
-|--------|-------------|
+| --- | --- |
 | `git` | Commit curation, PR creation, issue filing, and context switching |
 | `research` | Deep-dive multi-source research with cited evidence |
 | `comms` | Draft emails, Slack messages, blog posts in your voice |
 | `playwright-cli` | Browser automation for testing and data extraction |
-| `progressive-sim` | Timed progressive coding assessments |
+| `sim` | Progressive assessments and live pair programming challenges |
 | `sprint-worker` | Batch-process GitHub issues with parallel agents |
 | `tdd` | Red-green-refactor TDD cycle |
 | `obsidian` | Write notes to Obsidian vaults (configurable path) |
@@ -35,7 +35,7 @@ cd site && npm install && npm run dev
 ### Routes
 
 | Route | Description |
-|-------|-------------|
+| --- | --- |
 | `/plugins` | Plugin listing |
 | `/plugins/[name]` | Plugin detail — skills, commands, install |
 | `/plugins/[name]/skills/[skill]` | Skill detail — SKILL.md, reference files, file tree |

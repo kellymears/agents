@@ -1,5 +1,5 @@
 ---
-name: progressive-sim
+name: sim:progressive
 description: "Interactive test proctor for progressive coding assessments. Trigger on: 'new sim', 'generate a problem', 'practice problem', 'another simulation', or anything about creating timed coding exercises. Also trigger on: 'done', 'finished', 'next level', 'tests pass', 'I'm done' (to verify and advance), 'status', 'timer', 'how am I doing', 'where am I' (to check progress), and 'abandon', 'cancel sim', 'start over' (to end session). Any trigger while a session is active resumes the session. Generates progressive L1-L4 TypeScript projects incrementally, one level at a time, with vitest tests."
 ---
 
@@ -24,7 +24,7 @@ Files start with **only L1 content**. Each subsequent level is appended via Edit
 
 ### `.session.json` — Active proctor state
 
-**Location:** `~/.claude/skills/progressive-sim/.session.json`
+**Location:** `~/.claude/skills/sim-progressive/.session.json`
 
 Tracks the active session. Created on `new sim`, cleared on final completion or `abandon`.
 
@@ -69,7 +69,7 @@ All levels are pre-populated at session start (methods come from the problem ban
 
 ### `.history.json` — Completed domain tracking
 
-**Location:** `~/.claude/skills/progressive-sim/.history.json`
+**Location:** `~/.claude/skills/sim-progressive/.history.json`
 
 Tracks completed sessions to avoid repetition. Append after final completion.
 
@@ -103,7 +103,7 @@ Backward-compatible — old entries without timing data still work for domain av
 
 On **any** trigger, before doing anything else:
 
-1. Read `~/.claude/skills/progressive-sim/.session.json`
+1. Read `~/.claude/skills/sim-progressive/.session.json`
 2. If it exists with a `currentLevel` and `projectDir`:
    - Verify the project directory exists (use `ls` via Bash)
    - If directory exists -> treat as **resume** (show status dashboard, say "Resuming your session")
@@ -200,7 +200,7 @@ Run `cd <projectDir> && npm install` via Bash.
 
 ### Step 4: Write `.session.json`
 
-Create `~/.claude/skills/progressive-sim/.session.json` with all level metadata pre-populated. Set `currentLevel: 1` and level 1's `startedAt` to the current ISO timestamp.
+Create `~/.claude/skills/sim-progressive/.session.json` with all level metadata pre-populated. Set `currentLevel: 1` and level 1's `startedAt` to the current ISO timestamp.
 
 ### Step 5: Present Level 1 Dashboard
 

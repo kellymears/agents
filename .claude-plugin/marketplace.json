@@ -35,9 +35,9 @@
       "category": "browser"
     },
     {
-      "name": "progressive-sim",
-      "source": "./plugins/progressive-sim",
-      "description": "Interactive progressive coding assessment simulator with timed levels.",
+      "name": "sim",
+      "source": "./plugins/sim",
+      "description": "Coding challenge simulators — progressive assessments and live pair programming problems.",
       "version": "1.0.0",
       "category": "practice"
     },

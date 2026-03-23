@@ -1,0 +1,9 @@
+{
+  "name": "sim",
+  "description": "Coding challenge simulators — progressive assessments and live pair programming problems.",
+  "version": "1.0.0",
+  "category": "practice",
+  "author": {
+    "name": "Kelly Mears"
+  }
+}

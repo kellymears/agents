@@ -1,9 +1,0 @@
-{
-  "name": "progressive-sim",
-  "description": "Interactive progressive coding assessment simulator with timed levels.",
-  "version": "1.0.0",
-  "category": "practice",
-  "author": {
-    "name": "Kelly Mears"
-  }
-}
