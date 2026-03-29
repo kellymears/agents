@@ -1,7 +1,7 @@
 {
   "name": "kellymears",
   "description": "Plugin marketplace — git workflows, research, writing, browser automation, and more.",
-  "version": "1.3.0",
+  "version": "1.5.0",
   "owner": {
     "name": "Kelly Mears"
   },
@@ -10,7 +10,7 @@
       "name": "git",
       "source": "./plugins/git",
       "description": "Git workflow skills — commit curation, PR creation, issue filing, and context switching.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "git"
     },
     {
@@ -69,6 +69,27 @@
       "version": "0.0.8",
       "category": "monitoring",
       "type": "statusline"
+    },
+    {
+      "name": "cli",
+      "source": "./plugins/cli",
+      "description": "CLI design best practices — argument design, help text, output formatting, error handling, configuration, and robustness.",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
+      "name": "ink",
+      "source": "./plugins/ink",
+      "description": "Best practices for building terminal UIs with Ink (React for CLIs).",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
+      "name": "guardrails",
+      "source": "./plugins/guardrails",
+      "description": "Code quality hooks — auto-formatting, linting, file protection, context recovery, and subagent orientation.",
+      "version": "1.0.0",
+      "category": "quality"
     }
   ]
 }
