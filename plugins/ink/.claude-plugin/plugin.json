@@ -1,0 +1,9 @@
+{
+  "name": "ink",
+  "description": "Best practices for building terminal UIs with Ink (React for CLIs).",
+  "version": "1.0.0",
+  "category": "development",
+  "author": {
+    "name": "Kelly Mears"
+  }
+}
