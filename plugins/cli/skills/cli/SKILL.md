@@ -1,15 +1,7 @@
 ---
 name: cli
 description: >
-  CLI design best practices based on clig.dev — covers argument/flag design,
-  help text, output formatting, error handling, configuration, signals, and
-  robustness. Use this skill when building CLI tools, adding commands or flags,
-  designing help output, formatting terminal output, handling CLI errors,
-  reviewing CLI UX, or making any decisions about how a command-line program
-  interacts with its users. Also trigger when working with argument parsers
-  (yargs, commander, clap, cobra, click, argparse), exit codes, stdin/stdout
-  patterns, progress indicators, or interactive prompts. If the user is building
-  anything that runs in a terminal, this skill probably applies.
+  CLI design best practices based on clig.dev — covers argument/flag design, help text, output formatting, error handling, configuration, signals, and robustness. Use this skill when building CLI tools, adding commands or flags, designing help output, formatting terminal output, handling CLI errors, reviewing CLI UX, or making any decisions about how a command-line program interacts with its users. Also trigger when working with argument parsers (yargs, commander, clap, cobra, click, argparse), exit codes, stdin/stdout patterns, progress indicators, or interactive prompts. If the user is building anything that runs in a terminal, this skill probably applies.
 ---
 
 # CLI Design Guidelines
@@ -30,16 +22,16 @@ When adding commands, flags, or arguments to a CLI:
 
 **Use standard flag names.** These are conventions users already know:
 
-| Flag | Meaning |
-|---|---|
-| `-h`, `--help` | Help (never use `-h` for anything else) |
-| `-v`, `--version` | Version |
-| `-f`, `--force` | Skip confirmation |
-| `-n`, `--dry-run` | Preview without executing |
-| `-q`, `--quiet` | Suppress non-essential output |
-| `--json` | JSON output |
-| `--no-color` | Disable color |
-| `--no-input` | Disable interactive prompts |
+| Flag              | Meaning                                 |
+| ----------------- | --------------------------------------- |
+| `-h`, `--help`    | Help (never use `-h` for anything else) |
+| `-v`, `--version` | Version                                 |
+| `-f`, `--force`   | Skip confirmation                       |
+| `-n`, `--dry-run` | Preview without executing               |
+| `-q`, `--quiet`   | Suppress non-essential output           |
+| `--json`          | JSON output                             |
+| `--no-color`      | Disable color                           |
+| `--no-input`      | Disable interactive prompts             |
 
 See `references/clig-guidelines.md` → "Arguments and Flags" for the complete table.
 
@@ -58,6 +50,7 @@ See `references/clig-guidelines.md` → "Arguments and Flags" for the complete t
 **Show concise help when no arguments are given.** Description, one or two examples, common flags, and a pointer to `--help`.
 
 **All of these should work:**
+
 ```
 myapp
 myapp -h
@@ -80,6 +73,7 @@ myapp <subcommand> --help
 **Suggest next commands.** `git status` is the gold standard — it shows state and the commands to change it.
 
 **Color rules:**
+
 - Disable on non-TTY, when `NO_COLOR` is set, when `TERM=dumb`, or with `--no-color`.
 - Never use color as the only signifier — pair with symbols or text.
 
@@ -94,9 +88,11 @@ See `references/clig-guidelines.md` → "Output" for the full set of output guid
 ## Handling Errors
 
 **Rewrite errors for humans.** Catch expected errors and explain them with solutions:
+
 ```
 Can't write to file.txt. Make it writable with: chmod +w file.txt
 ```
+
 Don't surface raw stack traces or cryptic error codes.
 
 **Put the most important information last.** It's what the user sees when the command finishes — closest to their cursor.
@@ -136,6 +132,7 @@ See `references/clig-guidelines.md` → "Configuration" and "Environment Variabl
 **Prefer crash-only design.** Defer cleanup to next run. Exit on failure rather than attempting fragile recovery.
 
 **Handle Ctrl-C gracefully.** Print relevant output, then exit. Support double Ctrl-C — first press for graceful shutdown, second to force-quit:
+
 ```
 ^CGracefully stopping... (press Ctrl+C again to force)
 ```

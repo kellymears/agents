@@ -202,21 +202,21 @@ Don't dump raw stack traces or cryptic error codes at users.
 
 **Standard flag conventions:**
 
-| Flag | Meaning |
-|---|---|
-| `-a`, `--all` | Include everything |
-| `-d`, `--debug` | Debugging output |
-| `-f`, `--force` | Force without confirmation |
-| `--json` | JSON output |
-| `-h`, `--help` | Help (exclusive meaning) |
-| `-n`, `--dry-run` | Preview without executing |
-| `--no-input` | Disable all interactive prompts |
-| `-o`, `--output` | Output file path |
-| `-p`, `--port` | Port number |
-| `-q`, `--quiet` | Suppress non-essential output |
-| `-u`, `--user` | User specification |
-| `--version` | Version information |
-| `-v` | Typically version; avoid ambiguity with verbose |
+| Flag              | Meaning                                         |
+| ----------------- | ----------------------------------------------- |
+| `-a`, `--all`     | Include everything                              |
+| `-d`, `--debug`   | Debugging output                                |
+| `-f`, `--force`   | Force without confirmation                      |
+| `--json`          | JSON output                                     |
+| `-h`, `--help`    | Help (exclusive meaning)                        |
+| `-n`, `--dry-run` | Preview without executing                       |
+| `--no-input`      | Disable all interactive prompts                 |
+| `-o`, `--output`  | Output file path                                |
+| `-p`, `--port`    | Port number                                     |
+| `-q`, `--quiet`   | Suppress non-essential output                   |
+| `-u`, `--user`    | User specification                              |
+| `--version`       | Version information                             |
+| `-v`              | Typically version; avoid ambiguity with verbose |
 
 **Choose sensible defaults.** Flags should override defaults, not enable baseline functionality.
 
@@ -341,7 +341,7 @@ Three categories with appropriate mechanisms:
 **Standard variables to respect:**
 
 | Variable | Purpose |
-|---|---|
+| --- | --- |
 | `NO_COLOR` | Disable color output |
 | `FORCE_COLOR` | Force color output |
 | `DEBUG` | Enable verbose/debug output |
