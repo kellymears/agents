@@ -1,0 +1,73 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/restore-context.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/protect-files.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=$(jq -r \".tool_input.file_path\"); npx prettier --write \"$FILE\" 2>/dev/null || true'",
+            "timeout": 15,
+            "statusMessage": "Formatting..."
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Edit(*.ts)|Edit(*.tsx)|Write(*.ts)|Write(*.tsx)",
+            "command": "bash -c 'FILE=$(jq -r \".tool_input.file_path\"); npx eslint --fix \"$FILE\" 2>/dev/null || true'",
+            "timeout": 30,
+            "statusMessage": "Linting..."
+          }
+        ]
+      }
+    ],
+    "FileChanged": [
+      {
+        "matcher": "package.json",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'echo \"[$(date +%H:%M:%S)] package.json changed in ${CLAUDE_PROJECT_DIR:-.}\" >> \"$HOME/.claude/file-changes.log\"'"
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/subagent-context.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

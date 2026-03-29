@@ -1,0 +1,9 @@
+{
+  "name": "guardrails",
+  "description": "Code quality hooks — auto-formatting, linting, file protection, context recovery, and subagent orientation.",
+  "version": "1.0.0",
+  "category": "quality",
+  "author": {
+    "name": "Kelly Mears"
+  }
+}
