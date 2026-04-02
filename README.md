@@ -23,6 +23,10 @@ Add the marketplace, then install plugins by name:
 | `sprint-worker` | Batch-process GitHub issues with parallel agents |
 | `tdd` | Red-green-refactor TDD cycle |
 | `obsidian` | Write notes to Obsidian vaults (configurable path) |
+| `hud` | Real-time statusline HUD for monitoring |
+| `cli` | CLI design best practices — argument design, help text, output formatting |
+| `ink` | Best practices for building terminal UIs with Ink (React for CLIs) |
+| `guardrails` | Code quality hooks for safe, consistent workflows |
 
 ## Documentation Site
 
