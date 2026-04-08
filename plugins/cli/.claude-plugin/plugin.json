@@ -1,7 +1,7 @@
 {
   "name": "cli",
   "description": "CLI design best practices — argument design, help text, output formatting, error handling, configuration, and robustness.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "category": "development",
   "author": {
     "name": "Kelly Mears"

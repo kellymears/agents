@@ -1,0 +1,9 @@
+{
+  "name": "gist",
+  "description": "Create, list, view, edit, and delete GitHub gists. Private by default.",
+  "version": "1.0.0",
+  "category": "git",
+  "author": {
+    "name": "Kelly Mears"
+  }
+}

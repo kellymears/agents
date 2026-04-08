@@ -1,7 +1,7 @@
 {
   "name": "kellymears",
   "description": "Plugin marketplace — git workflows, research, writing, browser automation, and more.",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "owner": {
     "name": "Kelly Mears"
   },
@@ -74,7 +74,7 @@
       "name": "cli",
       "source": "./plugins/cli",
       "description": "CLI design best practices — argument design, help text, output formatting, error handling, configuration, and robustness.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "category": "development"
     },
     {
@@ -90,6 +90,13 @@
       "description": "Code quality hooks — auto-formatting, linting, file protection, context recovery, and subagent orientation.",
       "version": "1.0.0",
       "category": "quality"
+    },
+    {
+      "name": "gist",
+      "source": "./plugins/gist",
+      "description": "Create, list, view, edit, and delete GitHub gists. Private by default.",
+      "version": "1.0.0",
+      "category": "git"
     }
   ]
 }
