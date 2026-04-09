@@ -1,7 +1,7 @@
 {
   "name": "kellymears",
   "description": "Plugin marketplace — git workflows, research, writing, browser automation, and more.",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "owner": {
     "name": "Kelly Mears"
   },
@@ -97,6 +97,13 @@
       "description": "Create, list, view, edit, and delete GitHub gists. Private by default.",
       "version": "1.0.0",
       "category": "git"
+    },
+    {
+      "name": "flair",
+      "source": "./plugins/flair",
+      "description": "Kaomoji expressions, typed admonitions, and structured response formatting.",
+      "version": "1.0.0",
+      "category": "quality"
     }
   ]
 }

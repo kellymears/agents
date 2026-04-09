@@ -1,0 +1,9 @@
+{
+  "name": "flair",
+  "description": "Kaomoji expressions, typed admonitions, and structured response formatting.",
+  "version": "1.0.0",
+  "category": "quality",
+  "author": {
+    "name": "Kelly Mears"
+  }
+}
