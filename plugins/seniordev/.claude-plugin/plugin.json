@@ -1,0 +1,9 @@
+{
+  "name": "seniordev",
+  "version": "1.0.0",
+  "description": "Lazy senior dev mode — forces the simplest, shortest solution that actually works (YAGNI, stdlib first, no unrequested abstractions). Forked from ponytail by Dietrich Gebert.",
+  "author": {
+    "name": "Kelly Mears"
+  },
+  "category": "quality"
+}

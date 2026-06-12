@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/seniordev-activate.js\"",
+            "timeout": 5,
+            "statusMessage": "Loading seniordev mode..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/seniordev-mode-tracker.js\"",
+            "timeout": 5,
+            "statusMessage": "Tracking seniordev mode..."
+          }
+        ]
+      }
+    ]
+  }
+}

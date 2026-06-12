@@ -1,7 +1,7 @@
 {
   "name": "kellymears",
   "description": "Plugin marketplace — git workflows, research, writing, browser automation, and more.",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "owner": {
     "name": "Kelly Mears"
   },
@@ -103,6 +103,13 @@
       "source": "./plugins/styles",
       "description": "Kaomoji expressions, typed admonitions, and structured response formatting.",
       "version": "2.0.1",
+      "category": "quality"
+    },
+    {
+      "name": "seniordev",
+      "source": "./plugins/seniordev",
+      "description": "Lazy senior dev mode — forces the simplest solution that works (YAGNI, stdlib first, no unrequested abstractions). Forked from ponytail by Dietrich Gebert.",
+      "version": "1.0.0",
       "category": "quality"
     }
   ]
