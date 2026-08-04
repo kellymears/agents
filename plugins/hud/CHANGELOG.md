@@ -2,6 +2,11 @@
 
 All notable changes to Claude HUD will be documented in this file.
 
+## [0.0.9] - 2026-08-03
+
+### Fixed
+- **Profile-aware usage data** — sessions launched with `CLAUDE_CONFIG_DIR` now read that profile's OAuth token instead of the default profile's, so the usage bar shows the account the session actually bills. Claude Code namespaces its keychain entry as `Claude Code-credentials-<sha256(configDir)[0:8]>`; HUD now derives the same suffix (honoring `CLAUDE_SECURESTORAGE_CONFIG_DIR`). The usage cache, keychain backoff marker, and legacy `.credentials.json` fallback are namespaced the same way so profiles no longer serve each other stale data.
+
 ## [0.0.7] - 2026-02-06
 
 ### Changed

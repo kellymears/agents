@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import * as https from 'https';
+import * as crypto from 'crypto';
 import { execFileSync } from 'child_process';
 import type { UsageData } from './types.js';
 import { createDebug } from './debug.js';
@@ -48,8 +49,21 @@ interface CacheFile {
   timestamp: number;
 }
 
+/**
+ * Claude Code namespaces per-profile keychain entries by an 8-hex-char sha256
+ * of the config dir (CLAUDE_SECURESTORAGE_CONFIG_DIR overrides
+ * CLAUDE_CONFIG_DIR; empty string forces the default profile). Without this
+ * suffix an alternate-profile session reads the default profile's token and
+ * shows the wrong account's usage.
+ */
+export function profileSuffix(env: NodeJS.ProcessEnv = process.env): string {
+  const dir = env.CLAUDE_SECURESTORAGE_CONFIG_DIR ?? env.CLAUDE_CONFIG_DIR;
+  if (!dir) return '';
+  return `-${crypto.createHash('sha256').update(dir.normalize('NFC')).digest('hex').slice(0, 8)}`;
+}
+
 function getCachePath(homeDir: string): string {
-  return path.join(homeDir, '.claude', 'plugins', 'hud', '.usage-cache.json');
+  return path.join(homeDir, '.claude', 'plugins', 'hud', `.usage-cache${profileSuffix()}.json`);
 }
 
 function readCache(homeDir: string, now: number): UsageData | null {
@@ -193,7 +207,7 @@ export async function getUsage(overrides: Partial<UsageApiDeps> = {}): Promise<U
  * Separate from usage cache to track keychain-specific failures.
  */
 function getKeychainBackoffPath(homeDir: string): string {
-  return path.join(homeDir, '.claude', 'plugins', 'hud', '.keychain-backoff');
+  return path.join(homeDir, '.claude', 'plugins', 'hud', `.keychain-backoff${profileSuffix()}`);
 }
 
 /**
@@ -229,7 +243,8 @@ function recordKeychainFailure(homeDir: string, now: number): void {
 
 /**
  * Read credentials from macOS Keychain.
- * Claude Code 2.x stores OAuth credentials in the macOS Keychain under "Claude Code-credentials".
+ * Claude Code 2.x stores OAuth credentials in the macOS Keychain under
+ * "Claude Code-credentials" plus the profile suffix for the active config dir.
  * Returns null if not on macOS or credentials not found.
  *
  * Security: Uses execFileSync with absolute path to avoid shell injection and PATH hijacking.
@@ -251,7 +266,7 @@ function readKeychainCredentials(now: number, homeDir: string): { accessToken: s
     // Security: Use execFileSync with absolute path and args array (no shell)
     const keychainData = execFileSync(
       '/usr/bin/security',
-      ['find-generic-password', '-s', 'Claude Code-credentials', '-w'],
+      ['find-generic-password', '-s', `Claude Code-credentials${profileSuffix()}`, '-w'],
       { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'], timeout: KEYCHAIN_TIMEOUT_MS }
     ).trim();
 
@@ -273,10 +288,11 @@ function readKeychainCredentials(now: number, homeDir: string): { accessToken: s
 
 /**
  * Read credentials from file (legacy method).
- * Older versions of Claude Code stored credentials in ~/.claude/.credentials.json
+ * Older versions of Claude Code stored credentials in <config dir>/.credentials.json
  */
 function readFileCredentials(homeDir: string, now: number): { accessToken: string; subscriptionType: string } | null {
-  const credentialsPath = path.join(homeDir, '.claude', '.credentials.json');
+  const configDir = process.env.CLAUDE_CONFIG_DIR || path.join(homeDir, '.claude');
+  const credentialsPath = path.join(configDir, '.credentials.json');
 
   if (!fs.existsSync(credentialsPath)) {
     return null;

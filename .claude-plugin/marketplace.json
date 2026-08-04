@@ -1,7 +1,7 @@
 {
   "name": "kellymears",
   "description": "Plugin marketplace — git workflows, research, writing, browser automation, and more.",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "owner": {
     "name": "Kelly Mears"
   },
@@ -66,7 +66,7 @@
       "name": "hud",
       "source": "./plugins/hud",
       "description": "Real-time statusline — context health, tool activity, agent tracking, and todo progress.",
-      "version": "0.0.8",
+      "version": "0.0.9",
       "category": "monitoring",
       "type": "statusline"
     },

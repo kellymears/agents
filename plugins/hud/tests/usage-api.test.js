@@ -1,11 +1,14 @@
 import { test, describe, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { getUsage, clearCache } from '../dist/usage-api.js';
+import { getUsage, clearCache, profileSuffix } from '../dist/usage-api.js';
 import { mkdtemp, rm, mkdir, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 let tempHome = null;
+
+delete process.env.CLAUDE_CONFIG_DIR;
+delete process.env.CLAUDE_SECURESTORAGE_CONFIG_DIR;
 
 async function createTempHome() {
   return await mkdtemp(path.join(tmpdir(), 'hud-usage-'));
@@ -403,5 +406,26 @@ describe('isLimitReached', () => {
     };
 
     assert.equal(isLimitReached(data), true);
+  });
+});
+
+describe('profileSuffix', () => {
+  test('empty for default profile (no config dir env)', () => {
+    assert.equal(profileSuffix({}), '');
+  });
+
+  test('empty when CLAUDE_SECURESTORAGE_CONFIG_DIR is empty string', () => {
+    assert.equal(profileSuffix({ CLAUDE_SECURESTORAGE_CONFIG_DIR: '', CLAUDE_CONFIG_DIR: '/some/dir' }), '');
+  });
+
+  test('hashes CLAUDE_CONFIG_DIR to 8 hex chars, matching Claude Code keychain naming', () => {
+    assert.equal(profileSuffix({ CLAUDE_CONFIG_DIR: '/Users/kellymears/.claude-carrot' }), '-4df558d8');
+  });
+
+  test('CLAUDE_SECURESTORAGE_CONFIG_DIR wins over CLAUDE_CONFIG_DIR', () => {
+    const a = profileSuffix({ CLAUDE_SECURESTORAGE_CONFIG_DIR: '/dir/a', CLAUDE_CONFIG_DIR: '/dir/b' });
+    const b = profileSuffix({ CLAUDE_CONFIG_DIR: '/dir/a' });
+    assert.equal(a, b);
+    assert.match(a, /^-[0-9a-f]{8}$/);
   });
 });

@@ -14,6 +14,14 @@ interface UsageApiResult {
     data: UsageApiResponse | null;
     error?: string;
 }
+/**
+ * Claude Code namespaces per-profile keychain entries by an 8-hex-char sha256
+ * of the config dir (CLAUDE_SECURESTORAGE_CONFIG_DIR overrides
+ * CLAUDE_CONFIG_DIR; empty string forces the default profile). Without this
+ * suffix an alternate-profile session reads the default profile's token and
+ * shows the wrong account's usage.
+ */
+export declare function profileSuffix(env?: NodeJS.ProcessEnv): string;
 export type UsageApiDeps = {
     homeDir: () => string;
     fetchApi: (accessToken: string) => Promise<UsageApiResult>;
