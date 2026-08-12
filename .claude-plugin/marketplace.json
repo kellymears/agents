@@ -101,8 +101,8 @@
     {
       "name": "styles",
       "source": "./plugins/styles",
-      "description": "Kaomoji expressions, typed admonitions, and structured response formatting.",
-      "version": "2.0.1",
+      "description": "Output styles: kaomoji flair and ISO 24495 plain language.",
+      "version": "2.1.0",
       "category": "quality"
     },
     {
