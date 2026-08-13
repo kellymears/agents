@@ -1,0 +1,9 @@
+{
+  "name": "grill-me",
+  "version": "1.0.0",
+  "description": "A relentless interview to sharpen a plan or design — frontier-driven rounds of numbered questions with recommended answers. Ported from mattpocock/skills by Matt Pocock (MIT).",
+  "author": {
+    "name": "Kelly Mears"
+  },
+  "category": "planning"
+}

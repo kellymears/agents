@@ -1,7 +1,7 @@
 {
   "name": "kellymears",
   "description": "Plugin marketplace — git workflows, research, writing, browser automation, and more.",
-  "version": "1.9.1",
+  "version": "1.10.0",
   "owner": {
     "name": "Kelly Mears"
   },
@@ -111,6 +111,13 @@
       "description": "Lazy senior dev mode — forces the simplest solution that works (YAGNI, stdlib first, no unrequested abstractions). Forked from ponytail by Dietrich Gebert.",
       "version": "1.0.0",
       "category": "quality"
+    },
+    {
+      "name": "grill-me",
+      "source": "./plugins/grill-me",
+      "description": "A relentless interview to sharpen a plan or design — frontier-driven rounds of numbered questions with recommended answers. Ported from mattpocock/skills by Matt Pocock (MIT).",
+      "version": "1.0.0",
+      "category": "planning"
     }
   ]
 }
