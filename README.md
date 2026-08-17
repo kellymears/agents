@@ -13,20 +13,25 @@ Add the marketplace, then install plugins by name:
 
 ## Plugins
 
-| Plugin | Description |
-| --- | --- |
-| `git` | Commit curation, PR creation, issue filing, and context switching |
-| `research` | Deep-dive multi-source research with cited evidence |
-| `comms` | Draft emails, Slack messages, blog posts in your voice |
-| `playwright-cli` | Browser automation for testing and data extraction |
-| `sim` | Progressive assessments and live pair programming challenges |
-| `sprint-worker` | Batch-process GitHub issues with parallel agents |
-| `tdd` | Red-green-refactor TDD cycle |
-| `obsidian` | Write notes to Obsidian vaults (configurable path) |
-| `hud` | Real-time statusline HUD for monitoring |
-| `cli` | CLI design best practices — argument design, help text, output formatting |
-| `ink` | Best practices for building terminal UIs with Ink (React for CLIs) |
-| `guardrails` | Code quality hooks for safe, consistent workflows |
+| Plugin           | Description                                                               |
+| ---------------- | ------------------------------------------------------------------------- |
+| `git`            | Commit curation, PR creation, issue filing, and context switching         |
+| `research`       | Deep-dive multi-source research with cited evidence                       |
+| `comms`          | Draft emails, Slack messages, blog posts in your voice                    |
+| `playwright-cli` | Browser automation for testing and data extraction                        |
+| `sim`            | Progressive assessments and live pair programming challenges              |
+| `sprint-worker`  | Batch-process GitHub issues with parallel agents                          |
+| `tdd`            | Red-green-refactor TDD cycle                                              |
+| `obsidian`       | Write notes to Obsidian vaults (configurable path)                        |
+| `hud`            | Real-time statusline HUD for monitoring                                   |
+| `cli`            | CLI design best practices — argument design, help text, output formatting |
+| `ink`            | Best practices for building terminal UIs with Ink (React for CLIs)        |
+| `guardrails`     | Code quality hooks for safe, consistent workflows                         |
+| `gist`           | Create, list, view, edit, and delete GitHub gists                         |
+| `styles`         | Output styles — kaomoji flair and ISO 24495 plain language                |
+| `seniordev`      | Lazy senior dev mode — the simplest solution that works                   |
+| `remote-run`     | Run commands, builds, and tests headlessly on a remote dev box over SSH   |
+| `grill-me`       | A relentless interview to sharpen a plan or design                        |
 
 ## Documentation Site
 
@@ -38,10 +43,10 @@ cd site && npm install && npm run dev
 
 ### Routes
 
-| Route | Description |
-| --- | --- |
-| `/plugins` | Plugin listing |
-| `/plugins/[name]` | Plugin detail — skills, commands, install |
+| Route                            | Description                                         |
+| -------------------------------- | --------------------------------------------------- |
+| `/plugins`                       | Plugin listing                                      |
+| `/plugins/[name]`                | Plugin detail — skills, commands, install           |
 | `/plugins/[name]/skills/[skill]` | Skill detail — SKILL.md, reference files, file tree |
 
 ### Features
@@ -49,6 +54,15 @@ cd site && npm install && npm run dev
 - **Source/rendered toggle** — switch between raw markdown and formatted view; preference persisted to localStorage and applied globally
 - **File sidebar** — GitHub-style sidebar for browsing SKILL.md and reference files within a skill
 - **Copy as markdown** — copy button on every content block
+
+## Development
+
+Markdown is formatted with [dprint](https://dprint.dev) (config in `dprint.json`). A pre-commit hook in `.githooks/` formats staged markdown automatically; `npm install` activates it via the `prepare` script.
+
+```bash
+npm run format        # format all markdown
+npm run format:check  # CI check, no writes
+```
 
 ## Links
 
