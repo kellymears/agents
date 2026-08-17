@@ -1,7 +1,7 @@
 ---
 name: version
 description: >
-  Bump plugin versions in this repo's .claude-plugin/marketplace.json after making changes. Detects which plugins were modified, determines the appropriate semver bump (major, minor, or patch) from commit history, and updates the manifest. Use when the user wants to bump versions, update plugin versions, or says "version bump". Also trigger when the user says "bump changed plugins", "update versions", "bump versions", or anything about versioning plugins after making changes — even just "version" or "bump".
+  Bump plugin versions in this repo's .claude-plugin/marketplace.json after making changes. Detects which plugins were modified, determines the appropriate semver bump (major, minor, or patch) from commit history, updates the manifest, and syncs project documentation (README plugin table, site homepage) with the manifest. Use when the user wants to bump versions, update plugin versions, or says "version bump". Also trigger when the user says "bump changed plugins", "update versions", "bump versions", or anything about versioning plugins after making changes — even just "version" or "bump".
 ---
 
 # Plugin Version Bumper
@@ -16,10 +16,10 @@ This skill is scoped to the `kellymears/agents` repo. The manifest has a top-lev
 
 ## Versioning Rules
 
-| Bump | When | Example |
-| --- | --- | --- |
-| `patch` | Bug fixes, typo corrections, small adjustments | `1.0.0 → 1.0.1` |
-| `minor` | New skills, new features, non-breaking enhancements | `1.0.1 → 1.1.0` |
+| Bump    | When                                                                     | Example         |
+| ------- | ------------------------------------------------------------------------ | --------------- |
+| `patch` | Bug fixes, typo corrections, small adjustments                           | `1.0.0 → 1.0.1` |
+| `minor` | New skills, new features, non-breaking enhancements                      | `1.0.1 → 1.1.0` |
 | `major` | Breaking changes — renamed skills, removed features, restructured plugin | `1.1.0 → 2.0.0` |
 
 When in doubt, lean toward `patch`. The user can always override.
@@ -86,7 +86,17 @@ Update the version in **both** locations for each bumped plugin:
 
 Both files use 2-space indentation. Read each file, update its `version` field, and write it back. These two files must always agree — that's the whole point of this step.
 
-### 5. Report
+### 5. Sync Documentation
+
+The README and site homepage list plugins by hand, so they drift when plugins are added or removed. After applying bumps, check them against `.claude-plugin/marketplace.json` and fix any drift:
+
+1. **`README.md` — Plugins table**: one row per plugin in manifest order. Add rows for plugins missing from the table; remove rows for plugins no longer in the manifest. Keep descriptions to one short line.
+2. **`site/app/page.mdx` — install list**: one `/plugin install <name>@kellymears` line per plugin, with a short trailing comment. Same add/remove rule.
+3. **`site/app/page.mdx` — plugin-count card**: the `{"N Plugins"}` string must equal the number of plugins in the manifest.
+
+If nothing drifted, say so and move on. Version numbers themselves don't appear in the docs — only the plugin list and count need syncing.
+
+### 6. Report
 
 After updating, show what changed:
 
