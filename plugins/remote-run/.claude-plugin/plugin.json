@@ -1,0 +1,9 @@
+{
+  "name": "remote-run",
+  "description": "Run commands, builds, and tests headlessly on a remote dev box over SSH, with per-user host configuration.",
+  "version": "1.0.0",
+  "category": "automation",
+  "author": {
+    "name": "Kelly Mears"
+  }
+}

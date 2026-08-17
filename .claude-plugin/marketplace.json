@@ -1,7 +1,7 @@
 {
   "name": "kellymears",
   "description": "Plugin marketplace — git workflows, research, writing, browser automation, and more.",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "owner": {
     "name": "Kelly Mears"
   },
@@ -111,6 +111,13 @@
       "description": "Lazy senior dev mode — forces the simplest solution that works (YAGNI, stdlib first, no unrequested abstractions). Forked from ponytail by Dietrich Gebert.",
       "version": "1.0.0",
       "category": "quality"
+    },
+    {
+      "name": "remote-run",
+      "source": "./plugins/remote-run",
+      "description": "Run commands, builds, and tests headlessly on a remote dev box over SSH, with per-user host configuration.",
+      "version": "1.0.0",
+      "category": "automation"
     },
     {
       "name": "grill-me",
