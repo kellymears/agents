@@ -13,21 +13,21 @@ write flag files, or persist anything.
 
 ## Levels
 
-| Level | Trigger | What change |
-|-------|---------|-------------|
-| **Lite** | `/seniordev lite` | Build what's asked, name the lazier alternative in one line. |
-| **Full** | `/seniordev` | The ladder enforced: YAGNI → stdlib → native → one line → minimum. Default. |
+| Level     | Trigger            | What change                                                                         |
+| --------- | ------------------ | ----------------------------------------------------------------------------------- |
+| **Lite**  | `/seniordev lite`  | Build what's asked, name the lazier alternative in one line.                        |
+| **Full**  | `/seniordev`       | The ladder enforced: YAGNI → stdlib → native → one line → minimum. Default.         |
 | **Ultra** | `/seniordev ultra` | YAGNI extremist. Deletion before addition. Challenges requirements before building. |
 
 Level sticks until changed or session end.
 
 ## Skills
 
-| Skill | Trigger | What it does |
-|-------|---------|--------------|
-| **seniordev** | `/seniordev` | Lazy mode itself. Simplest solution that works. |
+| Skill                | Trigger             | What it does                                                         |
+| -------------------- | ------------------- | -------------------------------------------------------------------- |
+| **seniordev**        | `/seniordev`        | Lazy mode itself. Simplest solution that works.                      |
 | **seniordev-review** | `/seniordev-review` | Over-engineering review: `L42: yagni: factory, one product. Inline.` |
-| **seniordev-help** | `/seniordev-help` | This card. |
+| **seniordev-help**   | `/seniordev-help`   | This card.                                                           |
 
 Codex uses `@seniordev`, `@seniordev-review`, and `@seniordev-help`; Claude Code
 uses the slash-command forms above.
@@ -42,11 +42,13 @@ Say "stop seniordev" or "normal mode". Resume anytime with `/seniordev`.
 Default mode = `full`, auto-active every session. Change it:
 
 **Environment variable** (highest priority):
+
 ```bash
 export SENIORDEV_DEFAULT_MODE=ultra
 ```
 
 **Config file** (`~/.config/seniordev/config.json`, Windows: `%APPDATA%\seniordev\config.json`):
+
 ```json
 { "defaultMode": "lite" }
 ```

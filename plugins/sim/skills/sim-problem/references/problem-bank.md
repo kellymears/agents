@@ -121,6 +121,7 @@ Templates contain 60-80 lines with 2-3 subtle bugs and at least one architectura
 ### Buggy LRU Cache
 
 **Base template (bugs to find):**
+
 1. The `delete` method removes from the map but doesn't remove from the doubly-linked list (memory leak)
 2. When the cache is full and evicts, it evicts the most-recently-used instead of least-recently-used (head/tail confusion)
 3. `get` updates the access order but returns `undefined` for falsy values (0, empty string) because of a truthiness check
@@ -136,6 +137,7 @@ Templates contain 60-80 lines with 2-3 subtle bugs and at least one architectura
 ### Broken Middleware Pipeline
 
 **Base template (bugs to find):**
+
 1. Middleware functions are called in reverse order (the pipeline iterates backward instead of forward)
 2. A middleware that modifies the context object mutates the original — no cloning or immutability, so later middlewares see mutations from earlier ones even if the pipeline should be isolated
 3. If a middleware doesn't call `next()`, the pipeline hangs silently instead of resolving
@@ -151,6 +153,7 @@ Templates contain 60-80 lines with 2-3 subtle bugs and at least one architectura
 ### Flawed Observer Pattern
 
 **Base template (bugs to find):**
+
 1. Unsubscribing during notification iteration skips the next observer (classic array-mutation-during-iteration bug)
 2. If `notify()` is called while another `notify()` is already in progress (re-entrant), observers are called multiple times
 3. The `unsubscribe` method compares by reference but the template creates a new wrapper function on subscribe, so the reference the user gets back doesn't match what's stored

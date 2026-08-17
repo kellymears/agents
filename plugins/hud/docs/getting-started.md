@@ -36,12 +36,12 @@ After setup, the HUD appears below your input field immediately.
 
 ## Platform Support
 
-| Platform | Shell | Status |
-|----------|-------|--------|
-| macOS | bash/zsh | Fully supported |
-| Linux | bash/zsh | Fully supported |
-| Windows | PowerShell | Fully supported |
-| WSL | bash/zsh | Supported (use Linux instructions) |
+| Platform | Shell      | Status                             |
+| -------- | ---------- | ---------------------------------- |
+| macOS    | bash/zsh   | Fully supported                    |
+| Linux    | bash/zsh   | Fully supported                    |
+| Windows  | PowerShell | Fully supported                    |
+| WSL      | bash/zsh   | Supported (use Linux instructions) |
 
 **Runtime requirements**: Node.js 18+ or Bun. The setup command auto-detects which is available.
 

@@ -309,31 +309,31 @@ const output = renderToString(<MyComponent />, { columns: 80 });
 
 The `@inkjs/ui` package provides production-ready components with a theme system:
 
-| Component | Purpose |
-|-----------|---------|
-| `TextInput` | Single-line text with optional autocomplete |
-| `PasswordInput` | Masked input |
-| `ConfirmInput` | Y/n prompt |
-| `Select` | Scrollable single-select list |
-| `MultiSelect` | Multiple selections |
-| `Spinner` | Animated loading indicator with label |
-| `ProgressBar` | Percentage-based progress |
-| `Badge` | Status indicator (success/error/warning/info) |
-| `StatusMessage` | Formatted status messages |
-| `Alert` | High-priority status messages |
+| Component       | Purpose                                       |
+| --------------- | --------------------------------------------- |
+| `TextInput`     | Single-line text with optional autocomplete   |
+| `PasswordInput` | Masked input                                  |
+| `ConfirmInput`  | Y/n prompt                                    |
+| `Select`        | Scrollable single-select list                 |
+| `MultiSelect`   | Multiple selections                           |
+| `Spinner`       | Animated loading indicator with label         |
+| `ProgressBar`   | Percentage-based progress                     |
+| `Badge`         | Status indicator (success/error/warning/info) |
+| `StatusMessage` | Formatted status messages                     |
+| `Alert`         | High-priority status messages                 |
 
 Prefer `@inkjs/ui` components over community alternatives — they integrate with Ink's focus system and theme provider.
 
 ### Other Useful Packages
 
-| Package | Purpose |
-|---------|---------|
-| `ink-link` | Clickable terminal hyperlinks |
-| `ink-gradient` | Gradient text coloring |
-| `ink-big-text` | Large ASCII art text |
-| `ink-table` | Tabular data display |
-| `figures` | Cross-platform Unicode symbols |
-| `chalk` | String-level color (for non-component contexts) |
+| Package        | Purpose                                         |
+| -------------- | ----------------------------------------------- |
+| `ink-link`     | Clickable terminal hyperlinks                   |
+| `ink-gradient` | Gradient text coloring                          |
+| `ink-big-text` | Large ASCII art text                            |
+| `ink-table`    | Tabular data display                            |
+| `figures`      | Cross-platform Unicode symbols                  |
+| `chalk`        | String-level color (for non-component contexts) |
 
 ### Pastel — Framework for Larger CLIs
 

@@ -90,13 +90,13 @@ The session progresses through phases:
 
 ## Trigger map
 
-| User says | Workflow |
-| --- | --- |
-| "coding challenge", "mock interview", "pair programming", etc. | New Challenge |
-| "done", "ready", "finished", "next" | Phase Complete |
-| "status", "timer", "how am I doing" | Status Check |
-| "abandon", "cancel", "end session" | End Session |
-| Any trigger while session active | Resume -> Status Check |
+| User says                                                      | Workflow               |
+| -------------------------------------------------------------- | ---------------------- |
+| "coding challenge", "mock interview", "pair programming", etc. | New Challenge          |
+| "done", "ready", "finished", "next"                            | Phase Complete         |
+| "status", "timer", "how am I doing"                            | Status Check           |
+| "abandon", "cancel", "end session"                             | End Session            |
+| Any trigger while session active                               | Resume -> Status Check |
 
 ## Workflow: Session check (always first)
 
@@ -387,8 +387,8 @@ Let the candidate answer each question. Respond briefly to their answer -- ackno
 After the Q&A, provide a brief note on communication:
 
 ```
-  Communication
-  <1-2 observations about how they communicated during the session>
+Communication
+<1-2 observations about how they communicated during the session>
 ```
 
 Things to assess:
@@ -402,7 +402,7 @@ Things to assess:
 ### Final verdict
 
 ```
-  Verdict   <Pass / Borderline / Needs Practice>
+Verdict   <Pass / Borderline / Needs Practice>
 ```
 
 - **Pass** -- All base tests pass, at least one follow-up's tests pass, clean code and good reasoning

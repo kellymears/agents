@@ -27,20 +27,20 @@ const instance = render(<App />, options?);
 
 ### Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `stdout` | `WriteStream` | `process.stdout` | Output stream |
-| `stdin` | `ReadStream` | `process.stdin` | Input stream |
-| `stderr` | `WriteStream` | `process.stderr` | Error stream |
-| `exitOnCtrlC` | `boolean` | `true` | Auto-exit on Ctrl+C |
-| `patchConsole` | `boolean` | `true` | Intercept console.log to prevent output corruption |
-| `alternateScreen` | `boolean` | `false` | Fullscreen mode (like vim) |
-| `incrementalRendering` | `boolean` | `false` | Only redraw changed lines |
-| `debug` | `boolean` | `false` | Render each update as separate output |
-| `concurrent` | `boolean` | `false` | React Concurrent Mode |
-| `maxFps` | `number` | — | Throttle render rate |
-| `kittyKeyboard` | `boolean` | — | Kitty keyboard protocol (v6.7+) |
-| `onRender` | `(metrics) => void` | — | Callback with render timing |
+| Option                 | Type                | Default          | Description                                        |
+| ---------------------- | ------------------- | ---------------- | -------------------------------------------------- |
+| `stdout`               | `WriteStream`       | `process.stdout` | Output stream                                      |
+| `stdin`                | `ReadStream`        | `process.stdin`  | Input stream                                       |
+| `stderr`               | `WriteStream`       | `process.stderr` | Error stream                                       |
+| `exitOnCtrlC`          | `boolean`           | `true`           | Auto-exit on Ctrl+C                                |
+| `patchConsole`         | `boolean`           | `true`           | Intercept console.log to prevent output corruption |
+| `alternateScreen`      | `boolean`           | `false`          | Fullscreen mode (like vim)                         |
+| `incrementalRendering` | `boolean`           | `false`          | Only redraw changed lines                          |
+| `debug`                | `boolean`           | `false`          | Render each update as separate output              |
+| `concurrent`           | `boolean`           | `false`          | React Concurrent Mode                              |
+| `maxFps`               | `number`            | —                | Throttle render rate                               |
+| `kittyKeyboard`        | `boolean`           | —                | Kitty keyboard protocol (v6.7+)                    |
+| `onRender`             | `(metrics) => void` | —                | Callback with render timing                        |
 
 ### Instance Methods
 
@@ -68,79 +68,79 @@ Layout container. Flexbox via Yoga.
 
 ### Dimensions
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `width` | `number \| string` | Columns. String for percentage (`"50%"`) |
-| `height` | `number \| string` | Rows |
-| `minWidth` | `number` | Minimum width |
-| `minHeight` | `number` | Minimum height |
+| Prop        | Type               | Description                              |
+| ----------- | ------------------ | ---------------------------------------- |
+| `width`     | `number \| string` | Columns. String for percentage (`"50%"`) |
+| `height`    | `number \| string` | Rows                                     |
+| `minWidth`  | `number`           | Minimum width                            |
+| `minHeight` | `number`           | Minimum height                           |
 
 ### Padding
 
-| Prop | Type |
-|------|------|
-| `padding` | `number` — all sides |
-| `paddingX` | `number` — left + right |
-| `paddingY` | `number` — top + bottom |
-| `paddingTop` | `number` |
-| `paddingBottom` | `number` |
-| `paddingLeft` | `number` |
-| `paddingRight` | `number` |
+| Prop            | Type                    |
+| --------------- | ----------------------- |
+| `padding`       | `number` — all sides    |
+| `paddingX`      | `number` — left + right |
+| `paddingY`      | `number` — top + bottom |
+| `paddingTop`    | `number`                |
+| `paddingBottom` | `number`                |
+| `paddingLeft`   | `number`                |
+| `paddingRight`  | `number`                |
 
 Margin follows the same pattern: `margin`, `marginX`, `marginY`, `marginTop`, etc.
 
 ### Flex
 
-| Prop | Type | Default |
-|------|------|---------|
-| `flexDirection` | `"row" \| "column" \| "row-reverse" \| "column-reverse"` | `"row"` |
-| `flexGrow` | `number` | `0` |
-| `flexShrink` | `number` | `1` |
-| `flexBasis` | `number \| string` | — |
-| `flexWrap` | `"wrap" \| "nowrap" \| "wrap-reverse"` | `"nowrap"` |
-| `alignItems` | `"flex-start" \| "center" \| "flex-end" \| "stretch"` | `"stretch"` |
-| `alignSelf` | `"auto" \| "flex-start" \| "center" \| "flex-end" \| "stretch"` | — |
+| Prop             | Type                                                                                            | Default        |
+| ---------------- | ----------------------------------------------------------------------------------------------- | -------------- |
+| `flexDirection`  | `"row" \| "column" \| "row-reverse" \| "column-reverse"`                                        | `"row"`        |
+| `flexGrow`       | `number`                                                                                        | `0`            |
+| `flexShrink`     | `number`                                                                                        | `1`            |
+| `flexBasis`      | `number \| string`                                                                              | —              |
+| `flexWrap`       | `"wrap" \| "nowrap" \| "wrap-reverse"`                                                          | `"nowrap"`     |
+| `alignItems`     | `"flex-start" \| "center" \| "flex-end" \| "stretch"`                                           | `"stretch"`    |
+| `alignSelf`      | `"auto" \| "flex-start" \| "center" \| "flex-end" \| "stretch"`                                 | —              |
 | `justifyContent` | `"flex-start" \| "center" \| "flex-end" \| "space-between" \| "space-around" \| "space-evenly"` | `"flex-start"` |
-| `gap` | `number` | — |
-| `rowGap` | `number` | — |
-| `columnGap` | `number` | — |
+| `gap`            | `number`                                                                                        | —              |
+| `rowGap`         | `number`                                                                                        | —              |
+| `columnGap`      | `number`                                                                                        | —              |
 
 ### Border
 
-| Prop | Type |
-|------|------|
-| `borderStyle` | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic" \| BorderObject` |
-| `borderColor` | `string` — all borders |
-| `borderTopColor` | `string` |
-| `borderBottomColor` | `string` |
-| `borderLeftColor` | `string` |
-| `borderRightColor` | `string` |
-| `borderDimColor` | `boolean` |
+| Prop                | Type                                                                                                         |
+| ------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `borderStyle`       | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic" \| BorderObject` |
+| `borderColor`       | `string` — all borders                                                                                       |
+| `borderTopColor`    | `string`                                                                                                     |
+| `borderBottomColor` | `string`                                                                                                     |
+| `borderLeftColor`   | `string`                                                                                                     |
+| `borderRightColor`  | `string`                                                                                                     |
+| `borderDimColor`    | `boolean`                                                                                                    |
 
 `BorderObject`: `{ topLeft, top, topRight, left, right, bottomLeft, bottom, bottomRight }` — each a single character.
 
 ### Display
 
-| Prop | Type | Default |
-|------|------|---------|
-| `display` | `"flex" \| "none"` | `"flex"` |
+| Prop       | Type                    | Default     |
+| ---------- | ----------------------- | ----------- |
+| `display`  | `"flex" \| "none"`      | `"flex"`    |
 | `overflow` | `"visible" \| "hidden"` | `"visible"` |
 
 ---
 
 ## Text
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `color` | `string` | — | Named, hex, or rgb |
-| `backgroundColor` | `string` | — | Background color |
-| `dimColor` | `boolean` | `false` | Reduce brightness |
-| `bold` | `boolean` | `false` | |
-| `italic` | `boolean` | `false` | |
-| `underline` | `boolean` | `false` | |
-| `strikethrough` | `boolean` | `false` | |
-| `inverse` | `boolean` | `false` | Swap fg/bg |
-| `wrap` | `"wrap" \| "truncate" \| "truncate-start" \| "truncate-middle" \| "truncate-end"` | `"wrap"` | |
+| Prop              | Type                                                                              | Default  | Description        |
+| ----------------- | --------------------------------------------------------------------------------- | -------- | ------------------ |
+| `color`           | `string`                                                                          | —        | Named, hex, or rgb |
+| `backgroundColor` | `string`                                                                          | —        | Background color   |
+| `dimColor`        | `boolean`                                                                         | `false`  | Reduce brightness  |
+| `bold`            | `boolean`                                                                         | `false`  |                    |
+| `italic`          | `boolean`                                                                         | `false`  |                    |
+| `underline`       | `boolean`                                                                         | `false`  |                    |
+| `strikethrough`   | `boolean`                                                                         | `false`  |                    |
+| `inverse`         | `boolean`                                                                         | `false`  | Swap fg/bg         |
+| `wrap`            | `"wrap" \| "truncate" \| "truncate-start" \| "truncate-middle" \| "truncate-end"` | `"wrap"` |                    |
 
 Named colors: `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`, `gray`/`grey`, and bright variants (`blackBright`, `redBright`, etc.).
 
@@ -258,24 +258,24 @@ Official component library with a theme system (`ThemeProvider`, `extendTheme()`
 
 ### Input
 
-| Component | Props | Description |
-|-----------|-------|-------------|
-| `TextInput` | `value`, `onChange`, `placeholder`, `suggestions?` | Single-line text, optional autocomplete |
-| `EmailInput` | `value`, `onChange`, `placeholder`, `domains?` | Domain autocomplete after `@` |
-| `PasswordInput` | `value`, `onChange`, `placeholder` | Masked with asterisks |
-| `ConfirmInput` | `onConfirm`, `onCancel`, `defaultChoice?` | Y/n prompt |
-| `Select` | `options`, `onChange`, `highlightText?`, `visibleOptionCount?` | Scrollable single-select |
-| `MultiSelect` | `options`, `onChange`, `highlightText?`, `visibleOptionCount?` | Multiple selections |
+| Component       | Props                                                          | Description                             |
+| --------------- | -------------------------------------------------------------- | --------------------------------------- |
+| `TextInput`     | `value`, `onChange`, `placeholder`, `suggestions?`             | Single-line text, optional autocomplete |
+| `EmailInput`    | `value`, `onChange`, `placeholder`, `domains?`                 | Domain autocomplete after `@`           |
+| `PasswordInput` | `value`, `onChange`, `placeholder`                             | Masked with asterisks                   |
+| `ConfirmInput`  | `onConfirm`, `onCancel`, `defaultChoice?`                      | Y/n prompt                              |
+| `Select`        | `options`, `onChange`, `highlightText?`, `visibleOptionCount?` | Scrollable single-select                |
+| `MultiSelect`   | `options`, `onChange`, `highlightText?`, `visibleOptionCount?` | Multiple selections                     |
 
 ### Feedback
 
-| Component | Props | Description |
-|-----------|-------|-------------|
-| `Spinner` | `label?` | Animated loading indicator |
-| `ProgressBar` | `value` (0-100) | Percentage bar |
-| `Badge` | `color` (`"green" \| "red" \| "yellow" \| "blue"`) | Status indicator |
-| `StatusMessage` | `variant` (`"success" \| "error" \| "warning" \| "info"`) | Formatted status |
-| `Alert` | `variant`, `title?` | High-priority message |
+| Component       | Props                                                     | Description                |
+| --------------- | --------------------------------------------------------- | -------------------------- |
+| `Spinner`       | `label?`                                                  | Animated loading indicator |
+| `ProgressBar`   | `value` (0-100)                                           | Percentage bar             |
+| `Badge`         | `color` (`"green" \| "red" \| "yellow" \| "blue"`)        | Status indicator           |
+| `StatusMessage` | `variant` (`"success" \| "error" \| "warning" \| "info"`) | Formatted status           |
+| `Alert`         | `variant`, `title?`                                       | High-priority message      |
 
 ### Lists
 

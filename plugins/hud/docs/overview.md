@@ -32,17 +32,17 @@ The context bar uses native percentage data from Claude Code when available, wit
 
 All optional features are hidden by default. Enable them via `/hud:configure` or by editing `~/.claude/plugins/hud/config.json`:
 
-| Feature | Example | Config Key |
-|---------|---------|------------|
-| Tools activity | `◐ Edit: file.ts │ ✓ Read ×3` | `display.showTools` |
-| Agent status | `◐ explore [haiku]: Finding code` | `display.showAgents` |
-| Todo progress | `▸ Fix bug (2/5 tasks)` | `display.showTodos` |
-| Git status | `git:(main* ↑2 ↓1)` | `gitStatus.enabled` |
-| Usage limits | `5h: 25% │ 7d: 10%` | `display.showUsage` |
-| Config counts | `2 CLAUDE.md │ 4 rules │ 1 MCP` | `display.showConfigCounts` |
-| Token breakdown | `(in: 45k, cache: 12k)` | `display.showTokenBreakdown` |
-| Output speed | `out: 42.1 tok/s` | `display.showSpeed` |
-| Session duration | `⏱️ 5m` | `display.showDuration` |
+| Feature          | Example                           | Config Key                   |
+| ---------------- | --------------------------------- | ---------------------------- |
+| Tools activity   | `◐ Edit: file.ts │ ✓ Read ×3`     | `display.showTools`          |
+| Agent status     | `◐ explore [haiku]: Finding code` | `display.showAgents`         |
+| Todo progress    | `▸ Fix bug (2/5 tasks)`           | `display.showTodos`          |
+| Git status       | `git:(main* ↑2 ↓1)`               | `gitStatus.enabled`          |
+| Usage limits     | `5h: 25% │ 7d: 10%`               | `display.showUsage`          |
+| Config counts    | `2 CLAUDE.md │ 4 rules │ 1 MCP`   | `display.showConfigCounts`   |
+| Token breakdown  | `(in: 45k, cache: 12k)`           | `display.showTokenBreakdown` |
+| Output speed     | `out: 42.1 tok/s`                 | `display.showSpeed`          |
+| Session duration | `⏱️ 5m`                            | `display.showDuration`       |
 
 ## How It Works
 

@@ -81,6 +81,7 @@ Organized by purpose, from highest-value to nice-to-have. Each recommendation in
 **Scope:** Global (`~/.claude/settings.json`). You want this everywhere — agents repo, Carrot, personal projects.
 
 **Edge cases:**
+
 - Files without a Prettier config get Prettier defaults, which are close to yours. Acceptable.
 - Binary files and non-formattable extensions: Prettier exits silently. The `|| true` ensures exit 0.
 - The `2>/dev/null` suppresses Prettier's "no parser" warnings for files it can't handle.
@@ -378,6 +379,7 @@ Your philosophy is DX-first and minimal — three similar lines of code is bette
 ### Stop hooks (quality gates)
 
 A Stop hook that runs `npm test` before Claude can finish sounds appealing but has real problems:
+
 - **Not every conversation involves code changes.** Research, comms, planning — these don't need test verification.
 - **Infinite loop risk.** If the Stop hook blocks and Claude can't fix the test, you're stuck. The `stop_hook_active` guard prevents infinite recursion but the failure mode is still bad UX.
 - **You already have this covered.** Your CLAUDE.md instructions + the TDD plugin handle test-driven workflows when you want them. A global Stop hook is a blunt instrument for a scalpel problem.
@@ -432,40 +434,41 @@ plugins/guardrails/
 
 These are optional files you create in individual projects to customize hook behavior:
 
-| File | Path | Purpose |
-|------|------|---------|
-| `compact-context.txt` | Per-project `.claude/compact-context.txt` | Project-specific compaction recovery context |
-| `subagent-context.txt` | Per-project `.claude/subagent-context.txt` | Project-specific subagent orientation |
+| File                   | Path                                       | Purpose                                      |
+| ---------------------- | ------------------------------------------ | -------------------------------------------- |
+| `compact-context.txt`  | Per-project `.claude/compact-context.txt`  | Project-specific compaction recovery context |
+| `subagent-context.txt` | Per-project `.claude/subagent-context.txt` | Project-specific subagent orientation        |
 
 ---
 
 ## How These Hooks Interact With Your Existing Setup
 
-| Existing Feature | Hook Interaction |
-|-----------------|-----------------|
-| **Memory bridge** (`check-inbox.sh`) | Unchanged. The new SessionStart `compact` hook is a separate matcher group — both fire on their respective triggers, never conflicting. |
-| **HUD plugin** (statusline) | `statusMessage` fields on PostToolUse hooks give the HUD something to display during formatting/linting. |
-| **Git skills** (commits, PR, work) | The `validate-git.sh` hook protects against the same operations your CLAUDE.md warns about, but at the harness level. Skills that run normal git operations (add, commit, push) pass through unblocked. |
-| **Permissions allow list** | Hooks and permissions are complementary. Your `Bash(npx prettier:*)` permission lets Prettier run without prompting. The PostToolUse hook calls Prettier automatically. No conflict. |
-| **Agent teams** (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`) | SubagentStart hook injects context into all spawned agents. This is particularly useful when agent teams spawn multiple subagents that each need project awareness. |
+| Existing Feature                                         | Hook Interaction                                                                                                                                                                                        |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Memory bridge** (`check-inbox.sh`)                     | Unchanged. The new SessionStart `compact` hook is a separate matcher group — both fire on their respective triggers, never conflicting.                                                                 |
+| **HUD plugin** (statusline)                              | `statusMessage` fields on PostToolUse hooks give the HUD something to display during formatting/linting.                                                                                                |
+| **Git skills** (commits, PR, work)                       | The `validate-git.sh` hook protects against the same operations your CLAUDE.md warns about, but at the harness level. Skills that run normal git operations (add, commit, push) pass through unblocked. |
+| **Permissions allow list**                               | Hooks and permissions are complementary. Your `Bash(npx prettier:*)` permission lets Prettier run without prompting. The PostToolUse hook calls Prettier automatically. No conflict.                    |
+| **Agent teams** (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`) | SubagentStart hook injects context into all spawned agents. This is particularly useful when agent teams spawn multiple subagents that each need project awareness.                                     |
 
 ---
 
 ## Confidence Assessment
 
-| Dimension | Tier | Assessment |
-|-----------|------|------------|
-| Source Quality | **Strong** | Official Claude Code hooks documentation (2 pages retrieved and verified), plus direct inspection of your settings.json and existing hook scripts |
-| Consensus | **Settled** | Hook configuration is deterministic — the docs define the contract. Recommendations are opinionated but grounded in your observed patterns. |
-| Recency | **Current** | Documentation fetched 2026-03-28. Hooks API is stable since v2.1.85+ (introduced `if` field). |
-| Domain Familiarity | **Deep** | Claude Code hooks are core product documentation with thorough training data coverage. Your specific setup was verified by reading actual config files. |
-| Evidence | **Robust** | Recommendations based on: (1) official docs, (2) your actual settings.json, (3) your GitHub profile and language usage, (4) your CLAUDE.md conventions, (5) your plugin ecosystem |
+| Dimension          | Tier        | Assessment                                                                                                                                                                        |
+| ------------------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Source Quality     | **Strong**  | Official Claude Code hooks documentation (2 pages retrieved and verified), plus direct inspection of your settings.json and existing hook scripts                                 |
+| Consensus          | **Settled** | Hook configuration is deterministic — the docs define the contract. Recommendations are opinionated but grounded in your observed patterns.                                       |
+| Recency            | **Current** | Documentation fetched 2026-03-28. Hooks API is stable since v2.1.85+ (introduced `if` field).                                                                                     |
+| Domain Familiarity | **Deep**    | Claude Code hooks are core product documentation with thorough training data coverage. Your specific setup was verified by reading actual config files.                           |
+| Evidence           | **Robust**  | Recommendations based on: (1) official docs, (2) your actual settings.json, (3) your GitHub profile and language usage, (4) your CLAUDE.md conventions, (5) your plugin ecosystem |
 
 ---
 
 ## Methodology
 
 **Research approach:**
+
 1. Retrieved official Claude Code hooks documentation from `docs.anthropic.com` (redirected to `code.claude.com/docs/en/hooks` and `hooks-guide`)
 2. Read your `~/.claude/settings.json` to understand existing configuration
 3. Read `check-inbox.sh` to understand your hook scripting patterns
@@ -474,6 +477,7 @@ These are optional files you create in individual projects to customize hook beh
 6. Cross-referenced hook capabilities against your specific stack and workflows
 
 **Limitations:**
+
 - Could not access private repos or the Carrot codebase (`oncarrot/app`) — recommendations for that context are inferred from your global settings
 - Hook behavior was verified against documentation, not runtime testing — all scripts should be tested locally before deploying
 

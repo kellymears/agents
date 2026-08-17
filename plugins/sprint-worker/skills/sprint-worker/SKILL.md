@@ -302,11 +302,11 @@ After all agents complete (or fail):
 
 Display a results table:
 
-| # | Type | Title | Result | PR | Notes |
-| --- | --- | --- | --- | --- | --- |
-| 8601 | Bug | fix(editor): ... | ✅ Done | #8650 | Self-review caught XSS |
-| 8590 | Story | feat(preview): ... | ⏭️ Skipped |  | Missing acceptance criteria |
-| 8575 | Task | chore(cleanup): ... | ❌ Failed |  | Lint errors unfixable |
+| #    | Type  | Title               | Result    | PR    | Notes                       |
+| ---- | ----- | ------------------- | --------- | ----- | --------------------------- |
+| 8601 | Bug   | fix(editor): ...    | ✅ Done   | #8650 | Self-review caught XSS      |
+| 8590 | Story | feat(preview): ...  | ⏭️ Skipped |       | Missing acceptance criteria |
+| 8575 | Task  | chore(cleanup): ... | ❌ Failed |       | Lint errors unfixable       |
 
 ### 4.2 Follow-Ups
 
@@ -332,12 +332,12 @@ TeamDelete
 
 ## Error Handling
 
-| Scenario | Action |
-| --- | --- |
-| Agent fails mid-implementation | Don't push broken branches. Delete remote branch if already pushed (`git push origin --delete <branch>`). Report failure with error details. |
-| Branch already exists | Append `-v2`, `-v3` suffix and retry. |
-| Rate limiting from GitHub API | Wait 60s, retry once. If still failing, report and move on. |
-| Issue not found (404) | Report the invalid issue number to the user and skip it. |
-| Issue is underspecified | Skip with clear message about what sections are missing. |
-| Lint errors unfixable | Report the specific errors. Do not push code that fails linting. |
-| No eligible issues after filtering | Report cleanly and stop — no team creation needed. |
+| Scenario                           | Action                                                                                                                                       |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Agent fails mid-implementation     | Don't push broken branches. Delete remote branch if already pushed (`git push origin --delete <branch>`). Report failure with error details. |
+| Branch already exists              | Append `-v2`, `-v3` suffix and retry.                                                                                                        |
+| Rate limiting from GitHub API      | Wait 60s, retry once. If still failing, report and move on.                                                                                  |
+| Issue not found (404)              | Report the invalid issue number to the user and skip it.                                                                                     |
+| Issue is underspecified            | Skip with clear message about what sections are missing.                                                                                     |
+| Lint errors unfixable              | Report the specific errors. Do not push code that fails linting.                                                                             |
+| No eligible issues after filtering | Report cleanly and stop — no team creation needed.                                                                                           |

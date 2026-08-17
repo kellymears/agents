@@ -91,12 +91,12 @@ Backward-compatible — old entries without timing data still work for domain av
 
 ## Trigger map
 
-| User says | Workflow |
-| --- | --- |
-| "new sim", "generate a problem", "practice problem", etc. | New Simulation |
-| "done", "finished", "next", "tests pass", "I'm done" | Done / Verify |
-| "status", "timer", "how am I doing", "where am I" | Status Check |
-| "abandon", "cancel sim", "start over" | Clear `.session.json`, confirm |
+| User says                                                        | Workflow                       |
+| ---------------------------------------------------------------- | ------------------------------ |
+| "new sim", "generate a problem", "practice problem", etc.        | New Simulation                 |
+| "done", "finished", "next", "tests pass", "I'm done"             | Done / Verify                  |
+| "status", "timer", "how am I doing", "where am I"                | Status Check                   |
+| "abandon", "cancel sim", "start over"                            | Clear `.session.json`, confirm |
 | Any skill trigger while `.session.json` exists with active level | Session Resume -> Status Check |
 
 ## Workflow: Session check (always first)
@@ -393,7 +393,7 @@ Follow these rules when designing problems:
 
 **L2 is about operations over L1's data, not new entity types.** L2 methods should scan, filter, or query L1's data in new ways. Avoid introducing entirely new entity types at L2.
 
-**L3 adds time-parameterized variants, not new entities.** L3 should add time-parameterized _variants_ of existing L1-L2 methods (e.g., `set_at_with_ttl`, `get_at`, `scan_at`). Timestamps and TTL/expiration are the core L3 pattern.
+**L3 adds time-parameterized variants, not new entities.** L3 should add time-parameterized *variants* of existing L1-L2 methods (e.g., `set_at_with_ttl`, `get_at`, `scan_at`). Timestamps and TTL/expiration are the core L3 pattern.
 
 **L4 is the state snapshot pattern.** L4 should test backup/restore/transform of the full data state. Avoid making L4 about analytics or computed aggregates.
 

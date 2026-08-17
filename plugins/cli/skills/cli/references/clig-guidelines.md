@@ -187,8 +187,8 @@ Don't dump raw stack traces or cryptic error codes at users.
 
 **Terminology:**
 
-- _Arguments_ are positional; order matters. (`cp source dest`)
-- _Flags_ are named with `-letter` or `--word` syntax; order-independent. (`--force`, `-f`)
+- *Arguments* are positional; order matters. (`cp source dest`)
+- *Flags* are named with `-letter` or `--word` syntax; order-independent. (`--force`, `-f`)
 
 **Prefer flags over arguments.** Flags are self-documenting, easier to modify in the future, and can be required or optional independently.
 
@@ -220,13 +220,13 @@ Don't dump raw stack traces or cryptic error codes at users.
 
 **Choose sensible defaults.** Flags should override defaults, not enable baseline functionality.
 
-**Prompt for missing arguments interactively** when stdin is a TTY. But never _require_ prompts — every value must be settable via flag or argument. Skip prompts in non-interactive environments.
+**Prompt for missing arguments interactively** when stdin is a TTY. But never *require* prompts — every value must be settable via flag or argument. Skip prompts in non-interactive environments.
 
 **Confirm destructive operations.** Scale confirmation difficulty to severity:
 
-- _Mild_ (small local change): Optional confirmation, or just do it.
-- _Moderate_ (major local/remote changes): Usually prompt. Consider showing a dry-run preview first.
-- _Severe_ (complex/irreversible deletion): Require typing the resource name, or a dedicated flag.
+- *Mild* (small local change): Optional confirmation, or just do it.
+- *Moderate* (major local/remote changes): Usually prompt. Consider showing a dry-run preview first.
+- *Severe* (complex/irreversible deletion): Require typing the resource name, or a dedicated flag.
 
 **Support `-` for stdin/stdout.** Enables pipeline composition without temporary files.
 
@@ -340,19 +340,19 @@ Three categories with appropriate mechanisms:
 
 **Standard variables to respect:**
 
-| Variable | Purpose |
-| --- | --- |
-| `NO_COLOR` | Disable color output |
-| `FORCE_COLOR` | Force color output |
-| `DEBUG` | Enable verbose/debug output |
-| `EDITOR` | Preferred editor for multi-line input |
-| `HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, `NO_PROXY` | Network proxy config |
-| `SHELL` | User's shell |
-| `TERM`, `TERMINFO`, `TERMCAP` | Terminal capabilities |
-| `TMPDIR` | Temporary file location |
-| `HOME` | Home directory |
-| `PAGER` | Preferred pager |
-| `LINES`, `COLUMNS` | Terminal dimensions |
+| Variable                                             | Purpose                               |
+| ---------------------------------------------------- | ------------------------------------- |
+| `NO_COLOR`                                           | Disable color output                  |
+| `FORCE_COLOR`                                        | Force color output                    |
+| `DEBUG`                                              | Enable verbose/debug output           |
+| `EDITOR`                                             | Preferred editor for multi-line input |
+| `HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, `NO_PROXY` | Network proxy config                  |
+| `SHELL`                                              | User's shell                          |
+| `TERM`, `TERMINFO`, `TERMCAP`                        | Terminal capabilities                 |
+| `TMPDIR`                                             | Temporary file location               |
+| `HOME`                                               | Home directory                        |
+| `PAGER`                                              | Preferred pager                       |
+| `LINES`, `COLUMNS`                                   | Terminal dimensions                   |
 
 **Read `.env` files for project-specific config.** But use dedicated config files when settings get complex.
 
@@ -392,12 +392,12 @@ Three categories with appropriate mechanisms:
 
 ## Further Reading
 
-- _The Unix Programming Environment_ — Kernighan and Pike
+- *The Unix Programming Environment* — Kernighan and Pike
 - POSIX Utility Conventions
 - GNU Coding Standards: Program Behavior for All Programs
 - 12 Factor CLI Apps — Jeff Dickey
 - CLI Style Guide — Heroku
-- _The Design of Everyday Things_ — Don Norman
+- *The Design of Everyday Things* — Don Norman
 - no-color.org
 - The Poetics of CLI Command Names — Smallstep
 - Crash-only software: More than meets the eye — LWN

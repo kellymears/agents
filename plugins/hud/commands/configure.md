@@ -12,6 +12,7 @@ Store current values and note whether config exists (determines which flow to us
 ## Always On (Core Features)
 
 These are always enabled and NOT configurable:
+
 - Model name `[Opus]`
 - Context bar `████░░░░░░ 45%`
 
@@ -20,9 +21,11 @@ These are always enabled and NOT configurable:
 ## Two Flows Based on Config State
 
 ### Flow A: New User (no config)
+
 Questions: **Layout → Preset → Turn Off → Turn On**
 
 ### Flow B: Update Config (config exists)
+
 Questions: **Turn Off → Turn On → Git Style → Layout/Reset** (4 questions max)
 
 ---
@@ -30,6 +33,7 @@ Questions: **Turn Off → Turn On → Git Style → Layout/Reset** (4 questions 
 ## Flow A: New User (4 Questions)
 
 ### Q1: Layout
+
 - header: "Layout"
 - question: "Choose your HUD layout:"
 - multiSelect: false
@@ -39,6 +43,7 @@ Questions: **Turn Off → Turn On → Git Style → Layout/Reset** (4 questions 
   - "Compact + Separators" - One line with separator before activity
 
 ### Q2: Preset
+
 - header: "Preset"
 - question: "Choose a starting configuration:"
 - multiSelect: false
@@ -48,6 +53,7 @@ Questions: **Turn Off → Turn On → Git Style → Layout/Reset** (4 questions 
   - "Minimal" - Core only (model, context bar)
 
 ### Q3: Turn Off (based on chosen preset)
+
 - header: "Turn Off"
 - question: "Disable any of these? (enabled by your preset)"
 - multiSelect: true
@@ -63,6 +69,7 @@ Questions: **Turn Off → Turn On → Git Style → Layout/Reset** (4 questions 
   - "Session duration" - ⏱️ 5m
 
 ### Q4: Turn On (based on chosen preset)
+
 - header: "Turn On"
 - question: "Enable any of these? (disabled by your preset)"
 - multiSelect: true
@@ -77,6 +84,7 @@ If preset has all items OFF (Minimal), Q3 shows "Nothing to disable - Minimal pr
 ## Flow B: Update Config (4 Questions)
 
 ### Q1: Turn Off
+
 - header: "Turn Off"
 - question: "What do you want to DISABLE? (currently enabled)"
 - multiSelect: true
@@ -91,6 +99,7 @@ If more than 4 items ON, show Activity items (Tools, Agents, Todos, Git) first.
 Info items (Counts, Tokens, Usage, Speed, Duration) can be turned off via "Reset to Minimal" in Q4.
 
 ### Q2: Turn On
+
 - header: "Turn On"
 - question: "What do you want to ENABLE? (currently disabled)"
 - multiSelect: true
@@ -103,6 +112,7 @@ Info items (Counts, Tokens, Usage, Speed, Duration) can be turned off via "Reset
   - "Session duration" - ⏱️ 5m
 
 ### Q3: Git Style (only if Git is currently enabled)
+
 - header: "Git Style"
 - question: "How much git info to show?"
 - multiSelect: false
@@ -115,6 +125,7 @@ Info items (Counts, Tokens, Usage, Speed, Duration) can be turned off via "Reset
 **Skip Q3 if Git is OFF** - proceed to Q4.
 
 ### Q4: Layout/Reset
+
 - header: "Layout/Reset"
 - question: "Change layout or reset to preset?"
 - multiSelect: false
@@ -130,16 +141,19 @@ Info items (Counts, Tokens, Usage, Speed, Duration) can be turned off via "Reset
 ## Preset Definitions
 
 **Full** (everything ON):
+
 - Activity: Tools ON, Agents ON, Todos ON
 - Info: Counts ON, Tokens ON, Usage ON, Duration ON
 - Git: ON (with dirty indicator, no ahead/behind)
 
 **Essential** (activity + git):
+
 - Activity: Tools ON, Agents ON, Todos ON
 - Info: Counts OFF, Tokens OFF, Usage OFF, Duration ON
 - Git: ON (with dirty indicator)
 
 **Minimal** (core only — this is the default):
+
 - Activity: Tools OFF, Agents OFF, Todos OFF
 - Info: Counts OFF, Tokens OFF, Usage OFF, Duration OFF
 - Git: ON (with dirty indicator)
@@ -148,41 +162,42 @@ Info items (Counts, Tokens, Usage, Speed, Duration) can be turned off via "Reset
 
 ## Layout Mapping
 
-| Option | Config |
-|--------|--------|
-| Expanded | `lineLayout: "expanded", showSeparators: false` |
-| Compact | `lineLayout: "compact", showSeparators: false` |
-| Compact + Separators | `lineLayout: "compact", showSeparators: true` |
+| Option               | Config                                          |
+| -------------------- | ----------------------------------------------- |
+| Expanded             | `lineLayout: "expanded", showSeparators: false` |
+| Compact              | `lineLayout: "compact", showSeparators: false`  |
+| Compact + Separators | `lineLayout: "compact", showSeparators: true`   |
 
 ---
 
 ## Git Style Mapping
 
-| Option | Config |
-|--------|--------|
-| Branch only | `gitStatus: { enabled: true, showDirty: false, showAheadBehind: false, showFileStats: false }` |
-| Branch + dirty | `gitStatus: { enabled: true, showDirty: true, showAheadBehind: false, showFileStats: false }` |
-| Full details | `gitStatus: { enabled: true, showDirty: true, showAheadBehind: true, showFileStats: false }` |
-| File stats | `gitStatus: { enabled: true, showDirty: true, showAheadBehind: false, showFileStats: true }` |
+| Option         | Config                                                                                         |
+| -------------- | ---------------------------------------------------------------------------------------------- |
+| Branch only    | `gitStatus: { enabled: true, showDirty: false, showAheadBehind: false, showFileStats: false }` |
+| Branch + dirty | `gitStatus: { enabled: true, showDirty: true, showAheadBehind: false, showFileStats: false }`  |
+| Full details   | `gitStatus: { enabled: true, showDirty: true, showAheadBehind: true, showFileStats: false }`   |
+| File stats     | `gitStatus: { enabled: true, showDirty: true, showAheadBehind: false, showFileStats: true }`   |
 
 ---
 
 ## Element Mapping
 
-| Element | Config Key |
-|---------|------------|
-| Tools activity | `display.showTools` |
-| Agents status | `display.showAgents` |
-| Todo progress | `display.showTodos` |
-| Git status | `gitStatus.enabled` |
-| Config counts | `display.showConfigCounts` |
-| Token breakdown | `display.showTokenBreakdown` |
-| Output speed | `display.showSpeed` |
-| Usage limits | `display.showUsage` |
-| Usage bar style | `display.usageBarEnabled` |
-| Session duration | `display.showDuration` |
+| Element          | Config Key                   |
+| ---------------- | ---------------------------- |
+| Tools activity   | `display.showTools`          |
+| Agents status    | `display.showAgents`         |
+| Todo progress    | `display.showTodos`          |
+| Git status       | `gitStatus.enabled`          |
+| Config counts    | `display.showConfigCounts`   |
+| Token breakdown  | `display.showTokenBreakdown` |
+| Output speed     | `display.showSpeed`          |
+| Usage limits     | `display.showUsage`          |
+| Usage bar style  | `display.usageBarEnabled`    |
+| Session duration | `display.showDuration`       |
 
 **Always true (not configurable):**
+
 - `display.showModel: true`
 - `display.showContextBar: true`
 
@@ -190,10 +205,10 @@ Info items (Counts, Tokens, Usage, Speed, Duration) can be turned off via "Reset
 
 ## Usage Style Mapping
 
-| Option | Config |
-|--------|--------|
-| Bar style | `display.usageBarEnabled: true` — Shows `██░░ 25% (1h 30m / 5h)` |
-| Text style | `display.usageBarEnabled: false` — Shows `5h: 25% (1h 30m)` |
+| Option     | Config                                                           |
+| ---------- | ---------------------------------------------------------------- |
+| Bar style  | `display.usageBarEnabled: true` — Shows `██░░ 25% (1h 30m / 5h)` |
+| Text style | `display.usageBarEnabled: false` — Shows `5h: 25% (1h 30m)`      |
 
 **Note**: Usage style only applies when `display.showUsage: true`. When 7d usage >= 80%, it also shows with the same style.
 
@@ -202,12 +217,14 @@ Info items (Counts, Tokens, Usage, Speed, Duration) can be turned off via "Reset
 ## Processing Logic
 
 ### For New Users (Flow A):
+
 1. Apply chosen preset as base
 2. Apply Turn Off selections (set those items to OFF)
 3. Apply Turn On selections (set those items to ON)
 4. Apply chosen layout
 
 ### For Returning Users (Flow B):
+
 1. Start from current config
 2. Apply Turn Off selections (set to OFF, including usageBarEnabled if selected)
 3. Apply Turn On selections (set to ON, including usageBarEnabled if selected)
@@ -220,12 +237,14 @@ Info items (Counts, Tokens, Usage, Speed, Duration) can be turned off via "Reset
 ## Before Writing - Validate & Preview
 
 **GUARDS - Do NOT write config if:**
+
 - User cancels (Esc) → say "Configuration cancelled."
 - No changes from current config → say "No changes needed - config unchanged."
 
 **Show preview before saving:**
 
 1. **Summary of changes:**
+
 ```
 Layout: Compact → Expanded
 Git style: Branch + dirty
@@ -235,6 +254,7 @@ Changes:
 ```
 
 2. **Preview of HUD (Expanded layout):**
+
 ```
 [Opus | Pro] │ my-project git:(main*)
 Context ████░░░░░ 45% │ Usage ██░░░░░░░░ 25% (1h 30m / 5h)
@@ -243,6 +263,7 @@ Context ████░░░░░ 45% │ Usage ██░░░░░░░░
 ```
 
 **Preview of HUD (Compact layout):**
+
 ```
 [Opus | Pro] ████░░░░░ 45% | my-project git:(main*) | 5h: 25% | ⏱️ 5m
 ◐ Edit: file.ts | ✓ Read ×3
@@ -258,6 +279,7 @@ Context ████░░░░░ 45% │ Usage ██░░░░░░░░
 Write to `~/.claude/plugins/hud/config.json`.
 
 Merge with existing config, preserving:
+
 - `pathLevels` (not in configure flow)
 - `display.usageThreshold` (advanced config)
 - `display.environmentThreshold` (advanced config)

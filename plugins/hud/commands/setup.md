@@ -10,6 +10,7 @@ allowed-tools: Bash, Read, Edit, AskUserQuestion
 Check for inconsistent plugin state that can occur after failed installations:
 
 **macOS/Linux**:
+
 ```bash
 # Check 1: Cache exists?
 CACHE_EXISTS=$(ls -d ~/.claude/plugins/cache/kellymears/hud 2>/dev/null && echo "YES" || echo "NO")
@@ -24,6 +25,7 @@ echo "Cache: $CACHE_EXISTS | Registry: $REGISTRY_EXISTS | Temp: ${TEMP_FILES:-no
 ```
 
 **Windows (PowerShell)**:
+
 ```powershell
 $cache = Test-Path "$env:USERPROFILE\.claude\plugins\cache\kellymears\statusline"
 $registry = (Get-Content "$env:USERPROFILE\.claude\plugins\installed_plugins.json" -ErrorAction SilentlyContinue) -match "hud"
@@ -33,12 +35,12 @@ Write-Host "Cache: $cache | Registry: $registry | Temp: $($temp.Count) files"
 
 ### Interpreting Results
 
-| Cache | Registry | Meaning | Action |
-|-------|----------|---------|--------|
-| YES | YES | Normal install (may still be broken) | Continue to Step 1 |
-| YES | NO | Ghost install - cache orphaned | Clean up cache |
-| NO | YES | Ghost install - registry stale | Clean up registry |
-| NO | NO | Not installed | Continue to Step 1 |
+| Cache | Registry | Meaning                              | Action             |
+| ----- | -------- | ------------------------------------ | ------------------ |
+| YES   | YES      | Normal install (may still be broken) | Continue to Step 1 |
+| YES   | NO       | Ghost install - cache orphaned       | Clean up cache     |
+| NO    | YES      | Ghost install - registry stale       | Clean up registry  |
+| NO    | NO       | Not installed                        | Continue to Step 1 |
 
 If **temp files exist**, a previous install was interrupted. Clean them up.
 
@@ -47,6 +49,7 @@ If **temp files exist**, a previous install was interrupted. Clean them up.
 If ghost installation detected, ask user if they want to reset. If yes:
 
 **macOS/Linux**:
+
 ```bash
 # Remove orphaned cache
 rm -rf ~/.claude/plugins/cache/kellymears/hud
@@ -60,6 +63,7 @@ echo '{"version": 2, "plugins": {}}' > ~/.claude/plugins/installed_plugins.json
 ```
 
 **Windows (PowerShell)**:
+
 ```powershell
 # Remove orphaned cache
 Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\plugins\cache\kellymears\statusline" -ErrorAction SilentlyContinue
@@ -76,11 +80,13 @@ After cleanup, tell user to **restart Claude Code** and run `/install kellymears
 ### Linux: Cross-Device Filesystem Check
 
 **On Linux only**, if install keeps failing, check for EXDEV issue:
+
 ```bash
 [ "$(df --output=source ~ /tmp 2>/dev/null | tail -2 | uniq | wc -l)" = "2" ] && echo "CROSS_DEVICE"
 ```
 
 If this outputs `CROSS_DEVICE`, `/tmp` and home are on different filesystems. This causes `EXDEV: cross-device link not permitted` during installation. Workaround:
+
 ```bash
 mkdir -p ~/.cache/tmp && TMPDIR=~/.cache/tmp claude /install kellymears/agents
 ```
@@ -93,11 +99,11 @@ This is a [Claude Code platform limitation](https://github.com/anthropics/claude
 
 **IMPORTANT**: Determine the platform from your environment context (`Platform:` value), NOT from `uname -s`. The Bash tool may report a different environment than the user's actual platform (e.g., Git Bash on Windows reports MINGW even when the user launched Claude Code from PowerShell).
 
-| Platform | Command Format |
-|----------|---------------|
-| `darwin` | bash (macOS) |
-| `linux` | bash (all Linux distros including NixOS, Ubuntu, Arch, etc.) |
-| `win32` | PowerShell (works universally on Windows 10+) |
+| Platform | Command Format                                               |
+| -------- | ------------------------------------------------------------ |
+| `darwin` | bash (macOS)                                                 |
+| `linux`  | bash (all Linux distros including NixOS, Ubuntu, Arch, etc.) |
+| `win32`  | PowerShell (works universally on Windows 10+)                |
 
 ---
 
@@ -168,6 +174,7 @@ Run the generated command. It should produce output (the HUD lines) within a few
 ## Step 3: Apply Configuration
 
 Read the settings file and merge in the statusLine config, preserving all existing settings:
+
 - **macOS/Linux/Git Bash**: `~/.claude/settings.json`
 - **Windows (native PowerShell)**: `$env:USERPROFILE\.claude\settings.json`
 
@@ -190,6 +197,7 @@ If a write fails with `File has been unexpectedly modified`, re-read the file an
 After the statusLine is applied, ask the user if they'd like to enable additional features beyond the default 2-line display.
 
 Use AskUserQuestion:
+
 - header: "Extras"
 - question: "Enable any optional HUD features? (all hidden by default)"
 - multiSelect: true
@@ -200,11 +208,11 @@ Use AskUserQuestion:
 
 **If user selects any options**, write `~/.claude/plugins/hud/config.json` (create directories if needed):
 
-| Selection | Config keys |
-|-----------|------------|
-| Tools activity | `display.showTools: true` |
-| Agents & Todos | `display.showAgents: true, display.showTodos: true` |
-| Session info | `display.showDuration: true, display.showConfigCounts: true` |
+| Selection      | Config keys                                                  |
+| -------------- | ------------------------------------------------------------ |
+| Tools activity | `display.showTools: true`                                    |
+| Agents & Todos | `display.showAgents: true, display.showTodos: true`          |
+| Session info   | `display.showDuration: true, display.showConfigCounts: true` |
 
 Merge with existing config if the file already exists. Only write keys the user selected — don't write `false` for unselected items (defaults handle that).
 
@@ -215,6 +223,7 @@ Merge with existing config if the file already exists. Only write keys the user 
 ## Step 5: Verify & Finish
 
 Use AskUserQuestion:
+
 - Question: "Setup complete! The HUD should appear below your input field. Is it working?"
 - Options: "Yes, it's working" / "No, something's wrong"
 

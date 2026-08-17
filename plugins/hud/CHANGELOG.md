@@ -5,11 +5,13 @@ All notable changes to Claude HUD will be documented in this file.
 ## [0.0.9] - 2026-08-03
 
 ### Fixed
+
 - **Profile-aware usage data** — sessions launched with `CLAUDE_CONFIG_DIR` now read that profile's OAuth token instead of the default profile's, so the usage bar shows the account the session actually bills. Claude Code namespaces its keychain entry as `Claude Code-credentials-<sha256(configDir)[0:8]>`; HUD now derives the same suffix (honoring `CLAUDE_SECURESTORAGE_CONFIG_DIR`). The usage cache, keychain backoff marker, and legacy `.credentials.json` fallback are namespaced the same way so profiles no longer serve each other stale data.
 
 ## [0.0.7] - 2026-02-06
 
 ### Changed
+
 - **Redesigned default layout** — clean 2-line display replaces the previous multi-line default
   - Line 1: `[Opus | Max] │ my-project git:(main*)`
   - Line 2: `Context █████░░░░░ 45% │ Usage ██░░░░░░░░ 25% (1h 30m / 5h)`
@@ -24,10 +26,12 @@ All notable changes to Claude HUD will be documented in this file.
 - Seven-day usage threshold config (#107)
 
 ### Added
+
 - Setup onboarding now offers optional features (tools, agents & todos, session info) before finishing
 - `display.showSpeed` config option for output token speed
 
 ### Fixed
+
 - Show API failure reason in usage display (#109)
 - Support task todo updates in transcript parsing (#106)
 - Keep HUD to one line in compact mode (#105)
@@ -38,6 +42,7 @@ All notable changes to Claude HUD will be documented in this file.
 ## [0.0.6] - 2026-01-14
 
 ### Added
+
 - **Expanded multi-line layout mode** - splits the overloaded session line into semantic lines (#76)
   - Identity line: model, plan, context bar, duration
   - Project line: path, git status
@@ -50,13 +55,16 @@ All notable changes to Claude HUD will be documented in this file.
   - `display.environmentThreshold`: show env line only when counts >= N
 
 ### Changed
+
 - Default layout is now `expanded` for new installations
 - Threshold logic uses `max(5h, 7d)` to ensure high 7-day usage isn't hidden
 
 ### Fixed
+
 - Ghost installation detection and cleanup in setup command (#75)
 
 ### Migration
+
 - Existing configs with `layout: "default"` automatically migrate to `lineLayout: "compact"`
 - Existing configs with `layout: "separators"` migrate to `lineLayout: "compact"` + `showSeparators: true`
 
@@ -65,6 +73,7 @@ All notable changes to Claude HUD will be documented in this file.
 ## [0.0.5] - 2026-01-14
 
 ### Added
+
 - Native context percentage support for Claude Code v2.1.6+
   - Uses `used_percentage` field from stdin when available (accurate, matches `/context`)
   - Automatic fallback to manual calculation for older versions
@@ -75,20 +84,24 @@ All notable changes to Claude HUD will be documented in this file.
 - EXDEV cross-device error detection for Linux plugin installation (#53)
 
 ### Changed
+
 - Context percentage now uses percentage-based buffer (22.5%) instead of hardcoded 45k tokens (#55)
   - Scales correctly for enterprise context windows (>200k)
 - Remove automatic PR review workflow (#67)
 
 ### Fixed
+
 - Git status: move `--no-optional-locks` to correct position as global git option (#65)
 - Prevent stale `index.lock` files during git operations (#63)
 - Exclude disabled MCP servers from count (#47)
 - Reconvert Date objects when reading from usage API cache (#45)
 
 ### Credits
+
 - Ideas from [#30](https://github.com/jarrodwatts/claude-hud/pull/30) ([@r-firpo](https://github.com/r-firpo)), [#43](https://github.com/jarrodwatts/claude-hud/pull/43) ([@yansircc](https://github.com/yansircc)), [#49](https://github.com/jarrodwatts/claude-hud/pull/49) ([@StephenJoshii](https://github.com/StephenJoshii)) informed the autocompact solution
 
 ### Dependencies
+
 - Bump @types/node from 25.0.3 to 25.0.6 (#61)
 
 ---
@@ -96,6 +109,7 @@ All notable changes to Claude HUD will be documented in this file.
 ## [0.0.4] - 2026-01-07
 
 ### Added
+
 - Configuration system via `~/.claude/plugins/claude-hud/config.json`
 - Interactive `/claude-hud:configure` skill for in-Claude configuration
 - Usage API integration showing 5h/7d rate limits (Pro/Max/Team)
@@ -105,11 +119,13 @@ All notable changes to Claude HUD will be documented in this file.
 - Display toggles for all HUD elements
 
 ### Fixed
+
 - Git status spacing: `main*↑2↓1` → `main* ↑2 ↓1`
 - Root path rendering: show `/` instead of empty
 - Windows path normalization
 
 ### Credits
+
 - Config system, layouts, path levels, git toggle by @Tsopic (#32)
 - Usage API, configure skill, bug fixes by @melon-hub (#34)
 
@@ -118,17 +134,21 @@ All notable changes to Claude HUD will be documented in this file.
 ## [0.0.3] - 2025-01-06
 
 ### Added
+
 - Display git branch name in session line (#23)
 - Display project folder name in session line (#18)
 - Dynamic platform and runtime detection in setup command (#24)
 
 ### Changed
+
 - Remove redundant COMPACT warning at high context usage (#27)
 
 ### Fixed
+
 - Skip auto-review for fork PRs to prevent CI failures (#25)
 
 ### Dependencies
+
 - Bump @types/node from 20.19.27 to 25.0.3 (#2)
 
 ---
@@ -136,20 +156,24 @@ All notable changes to Claude HUD will be documented in this file.
 ## [0.0.2] - 2025-01-04
 
 ### Security
+
 - Add CI workflow to build dist/ after merge - closes attack vector where malicious code could be injected via compiled output in PRs
 - Remove dist/ from git tracking - PRs now contain source only, CI handles compilation
 
 ### Fixed
+
 - Add 45k token autocompact buffer to context percentage calculation - now matches `/context` output accurately by accounting for Claude Code's reserved autocompact space
 - Fix CI caching with package-lock.json
 - Use Opus 4.5 for GitHub Actions code review
 
 ### Changed
+
 - Setup command now auto-detects installed plugin version (no manual path updates needed)
 - Setup prompts for optional GitHub star after successful configuration
 - Remove husky pre-commit hook (CI now handles dist/ compilation)
 
 ### Dependencies
+
 - Bump c8 from 9.1.0 to 10.1.3
 
 ---
@@ -159,6 +183,7 @@ All notable changes to Claude HUD will be documented in this file.
 Initial release of Claude HUD as a Claude Code statusline plugin.
 
 ### Features
+
 - Real-time context usage monitoring with color-coded progress bar
 - Active tool tracking with completion counts
 - Running agent status with elapsed time

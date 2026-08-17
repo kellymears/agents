@@ -8,7 +8,7 @@ Core traits of the user's writing voice, observed across casual Slack messages, 
 
 **Short declarative sentences.** Periods do the heavy lifting. Semicolons appear occasionally and deliberately — they survive even in casual Slack messages. Rarely more than one clause per sentence.
 
-**Precise emphasis.** Italics on one key phrase per paragraph when emphasis is needed. Not scattered, not decorative. Emphasis lands because it's rare: _mutate_, _produce_, _undeniable_.
+**Precise emphasis.** Italics on one key phrase per paragraph when emphasis is needed. Not scattered, not decorative. Emphasis lands because it's rare: *mutate*, *produce*, *undeniable*.
 
 **Concrete over abstract.** "Churu (a tube of puréed meat)" not "a preferred treat option." "79% and 96%" not "extremely high rates." Specifics carry the weight that adjectives try to.
 

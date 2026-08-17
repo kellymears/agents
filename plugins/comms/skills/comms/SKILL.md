@@ -10,7 +10,7 @@ Draft human-facing writing that sounds like the person wrote it, not like a lang
 
 ## Why This Skill Exists
 
-AI-generated prose has a recognizable texture. Readers can't always name what's off, but they feel it — and then they stop trusting the text. The goal here is to produce writing that reads as authentically human. Specifically, as authentically _this_ human.
+AI-generated prose has a recognizable texture. Readers can't always name what's off, but they feel it — and then they stop trusting the text. The goal here is to produce writing that reads as authentically human. Specifically, as authentically *this* human.
 
 ## Before You Write Anything
 
